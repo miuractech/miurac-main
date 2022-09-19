@@ -1,0 +1,84 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/mockup-generator/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/mockup-generator",
+        "index": "apps/mockup-generator/src/index.html",
+        "baseHref": "/",
+        "main": "apps/mockup-generator/src/main.tsx",
+        "polyfills": "apps/mockup-generator/src/polyfills.ts",
+        "tsConfig": "apps/mockup-generator/tsconfig.app.json",
+        "assets": [
+          "apps/mockup-generator/src/favicon.ico",
+          "apps/mockup-generator/src/assets"
+        ],
+        "styles": ["apps/mockup-generator/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack",
+        "postcssConfig": "apps/mockup-generator/postcss.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/mockup-generator/src/environments/environment.ts",
+              "with": "apps/mockup-generator/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "mockup-generator:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "mockup-generator:build:development"
+        },
+        "production": {
+          "buildTarget": "mockup-generator:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/mockup-generator/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/mockup-generator"],
+      "options": {
+        "jestConfig": "apps/mockup-generator/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

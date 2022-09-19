@@ -4,6 +4,9 @@
   "projects": {
     "admin": "apps/admin",
     "admin-e2e": "apps/admin-e2e",
+    "mockup-generator": "apps/mockup-generator",
+    "mockup-generator-e2e": "apps/mockup-generator-e2e",
+    "resources": "libs/resources",
     "website": "apps/website",
     "website-e2e": "apps/website-e2e"
   }

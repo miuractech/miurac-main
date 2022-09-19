@@ -1,0 +1,59 @@
+@tailwind components;
+@tailwind utilities;
+/* You can add global styles to this file, and also import other style files */
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic);
+body{
+    font-family: "Lato";
+}
+*{
+  margin: 0px;
+  padding: 0px;
+}
+body{
+    background-color: aliceblue;
+}
+@keyframes wave-text{
+    00%{
+      transform: translateY(0em);
+    }
+    2%{
+      transform: translateY(-0.1em);
+    }
+    5%{
+      transform: translateY(0em);
+    }
+    100%{
+        transform: translateY(0em);
+      }
+  }
+.a-p:hover span {
+    display: inline-block;
+    animation: wave-text 5s ease-in-out infinite;
+  }
+
+
+.a-p span:nth-child(2){
+        animation-delay: 0.0s;
+}
+.a-p span:nth-child(3){
+    animation-delay: 0.05s;
+}
+.a-p span:nth-child(4){
+    animation-delay: 0.1s;
+}
+.a-p span:nth-child(5){
+    animation-delay: 0.15s;
+}
+.a-p span:nth-child(6){
+    animation-delay: 0.2s;
+}
+.a-p span:nth-child(7){
+    animation-delay: 0.25s;
+}
+
+
