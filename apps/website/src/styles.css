@@ -1,8 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic);
 @tailwind components;
 /* @tailwind base; */
 @tailwind utilities;
 /* You can add global styles to this file, and also import other style files */
-@import url(https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic);
+body{
+  margin: 0px;
+}
 .lato{
     font-family: "Lato";
 }
@@ -45,4 +48,7 @@
     animation-delay: 0.25s;
 }
 
-
+.h-full-scr{
+  height: calc(100vh - 60px);
+  background-color: aqua;
+}

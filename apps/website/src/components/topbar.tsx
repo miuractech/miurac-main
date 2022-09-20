@@ -12,10 +12,11 @@ export default function Topbar({children}: Props) {
   return (
     <AppShell
      
-      padding="md"
+      padding={0}
     //   navbar={<Navbar width={{ base: 300 }} height={500} p="xs">{/* Navbar content */}</Navbar>}
       header={<Header 
-        className='a-p flex justify-between'
+        fixed
+        className='a-p flex justify-between bg-transparent'
       height={60} p="xs" px="xl">
         <div className="flex items-center">
         <Logo height={40} imgProps={{className:"mr-2"}} /> 
