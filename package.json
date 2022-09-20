@@ -36,7 +36,6 @@
     "react-dom": "18.2.0",
     "react-konva": "^18.2.1",
     "react-medium-image-zoom": "^5.0.2",
-    "react-progressive-image": "^0.6.0",
     "react-router-dom": "^6.4.0",
     "regenerator-runtime": "0.13.7",
     "tabler-icons-react": "^1.55.0",

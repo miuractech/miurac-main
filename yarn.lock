@@ -9044,11 +9044,6 @@ react-medium-image-zoom@^5.0.2:
   resolved "https://registry.yarnpkg.com/react-medium-image-zoom/-/react-medium-image-zoom-5.0.2.tgz#2ec051205e7bfc53759f8a3a1bfd1c594f96100c"
   integrity sha512-DGdsNaixDgXnEFFpCV6YHJYG4VQOvzs3PHS3h+nfIV82GO0cWetXrBQFGA77DMGODe6DuBX2SQPqZAQVKpLdcw==
 
-react-progressive-image@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/react-progressive-image/-/react-progressive-image-0.6.0.tgz#56b1c7153a6e1ebbe2a3bbf8f98c37410fbc67c2"
-  integrity sha512-/yc8N3lHskPQkubm+QH5RIQHA89Sigv7p9UkvbHzKVE2OBb6njhmquk7GW/f2Y//mzk5DesFHN/hV5RWhd6IXA==
-
 react-quill@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-quill/-/react-quill-2.0.0.tgz#67a0100f58f96a246af240c9fa6841b363b3e017"

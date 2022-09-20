@@ -2,53 +2,81 @@
 @tailwind components;
 /* @tailwind base; */
 @tailwind utilities;
+
 /* You can add global styles to this file, and also import other style files */
-body{
+@font-face {
+  font-family: 'Roie';
+  src: url('./assets/Roie.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
   margin: 0px;
 }
-.lato{
-    font-family: "Lato";
+
+.roie {
+  font-family: "Roie", serif;
+  ;
 }
-@keyframes wave-text{
-    00%{
-      transform: translateY(0em);
-    }
-    2%{
-      transform: translateY(-0.1em);
-    }
-    5%{
-      transform: translateY(0em);
-    }
-    100%{
-        transform: translateY(0em);
-      }
+
+.lato {
+  font-family: "Lato";
+}
+
+@keyframes wave-text {
+  00% {
+    transform: translateY(0em);
   }
+
+  2% {
+    transform: translateY(-0.1em);
+  }
+
+  5% {
+    transform: translateY(0em);
+  }
+
+  100% {
+    transform: translateY(0em);
+  }
+}
+
 .a-p:hover span {
-    display: inline-block;
-    animation: wave-text 5s ease-in-out infinite;
-  }
-
-
-.a-p span:nth-child(2){
-        animation-delay: 0.0s;
-}
-.a-p span:nth-child(3){
-    animation-delay: 0.05s;
-}
-.a-p span:nth-child(4){
-    animation-delay: 0.1s;
-}
-.a-p span:nth-child(5){
-    animation-delay: 0.15s;
-}
-.a-p span:nth-child(6){
-    animation-delay: 0.2s;
-}
-.a-p span:nth-child(7){
-    animation-delay: 0.25s;
+  display: inline-block;
+  animation: wave-text 5s ease-in-out infinite;
 }
 
-.h-full-scr{
+
+.a-p span:nth-child(2) {
+  animation-delay: 0.0s;
+}
+
+.a-p span:nth-child(3) {
+  animation-delay: 0.05s;
+}
+
+.a-p span:nth-child(4) {
+  animation-delay: 0.1s;
+}
+
+.a-p span:nth-child(5) {
+  animation-delay: 0.15s;
+}
+
+.a-p span:nth-child(6) {
+  animation-delay: 0.2s;
+}
+
+.a-p span:nth-child(7) {
+  animation-delay: 0.25s;
+}
+
+.h-full-scr {
   height: calc(100vh - 60px);
   background-color: aqua;
+}
+
+.template-shadow {
+  box-shadow: 0px -15px 20px rgba(165, 171, 183, 0.15);
 }
