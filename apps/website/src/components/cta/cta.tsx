@@ -16,6 +16,7 @@ import { useClickOutside, useMediaQuery } from '@mantine/hooks';
 import { useForm, yupResolver } from '@mantine/form';
 import { motion } from 'framer-motion';
 import * as yup from 'yup';
+import React from 'react';
 const Square = ({ toggleFullScreen }: { toggleFullScreen: () => void }) => {
   return (
     <Flipped flipId="square">
@@ -71,8 +72,9 @@ export const CTA = ({
 }) => {
   const toggleFullScreen = () => setFullScreen((prevState) => !prevState);
   const matches = useMediaQuery('(min-width: 900px)');
+  const id = React.useId()
   return (
-    <div className={`h-12`}>
+    <div id={React.useId()} className={`h-12`}>
       {matches ? (
         <Flipper flipKey={fullScreen} spring="veryGentle">
           {fullScreen ? (
