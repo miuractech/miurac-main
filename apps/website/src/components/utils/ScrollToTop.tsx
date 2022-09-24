@@ -1,5 +1,5 @@
 import React from 'react';
-import { Affix, Button, Transition } from '@mantine/core';
+import { ActionIcon, Affix, Button, Transition } from '@mantine/core';
 import { IconArrowUp } from '@tabler/icons';
 import { useWindowScroll } from '@mantine/hooks';
 
@@ -10,16 +10,18 @@ type Props = {};
 export default function ScrollToTop({}: Props) {
   const [scroll, scrollTo] = useWindowScroll();
   return (
-    <Affix position={{ bottom: 20, right: 20 }}>
-      <Transition transition="slide-up" mounted={scroll.y > 0}>
+    <Affix position={{ bottom: 40, right: 40 }}>
+      <Transition transition="slide-up" mounted={scroll.y > 100}>
         {(transitionStyles) => (
-          <Button
-            leftIcon={<IconArrowUp size={16} />}
+          <ActionIcon
+            // leftIcon={<IconArrowUp size={16} />}
             style={transitionStyles}
+            variant="filled"
             onClick={() => scrollTo({ y: 0 })}
+            className="font-light"
           >
-            Scroll to top
-          </Button>
+            <IconArrowUp size={16} />
+          </ActionIcon>
         )}
       </Transition>
     </Affix>

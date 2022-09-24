@@ -1,0 +1,41 @@
+.full-screen-square {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 80px);
+  z-index: 5000;
+  /* height: 400px;   */
+  cursor: pointer;
+  background-color: #202025;
+  color: #9DAABE;
+}
+@media only screen and (max-width: 770px) {
+  .full-screen-square {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translate(-50%, calc(0% ));
+    width: 100%;
+    z-index: 9999;
+    /* height: 400px;   */
+    cursor: pointer;
+    background-color: #202025;
+    color: #9DAABE;
+  }
+}
+
+.input-box::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #9DAABE;
+  opacity: 0.5; /* Firefox */
+}
+
+.input-box:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #9DAABE;
+  opacity: 0.5;
+}
+
+.input-box::-ms-input-placeholder { /* Microsoft Edge */
+  color: #9DAABE;
+  opacity: 0.5;
+}

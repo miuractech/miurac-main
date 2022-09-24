@@ -1,15 +1,25 @@
+import { Route, Routes } from 'react-router-dom';
 import Topbar from '../components/topbar';
 import ScrollToTop from '../components/utils/ScrollToTop';
 import Home from '../pages/home';
 
 export function App() {
   return (
-    <Topbar>
-      <div style={{ marginTop: -60 }}>
-        <Home />
+    <div className="scroll">
+      <Topbar />
+      <Routes>
+          <Route
+            path={'/'}
+            element={
+              <div>
+                <Home />
+                
+              </div>
+            }
+          ></Route>
+        </Routes>
         <ScrollToTop />
-      </div>
-    </Topbar>
+    </div>
   );
 }
 

@@ -1,0 +1,75 @@
+.m-container {
+    font-family: sans-serif;
+  }
+  
+.m-dates {
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 3rem;
+}
+
+.m-title {
+  color: navy;
+  font-weight: 800;
+  margin: 0;
+}
+
+.m-card-container {
+  width: 9rem;
+  height: 3rem;
+  position: relative;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.m-card {
+  overflow: hidden;
+  /* box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.2); */
+  padding: 2rem;
+  /* border-radius: 1rem; */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  cursor: pointer;
+}
+
+.m-expanded {
+  width: 400px;
+  height: 400px;
+  background-color: #1E1E20;
+  position: relative;
+  left: 100%;
+  border-radius: 16px;
+  top: -400px;
+}
+
+.m-secondary {
+  background-color: white;
+  height: 2.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  /* width: 8rem; */
+  margin-left: 1rem;
+}
+
+.m-compact {
+  /* width: 3rem; */
+  height: 3rem;
+  padding: 0.5rem;
+  /* border-radius: 1.5rem; */
+}
+
+.m-expanded .m-title {
+  font-size: 5em;
+  color: white;
+}
+
+.m-compact .m-title {
+  font-size: 1.5em;
+}
