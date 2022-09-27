@@ -47,33 +47,33 @@ body {
   }
 }
 
-.a-p:hover span {
+.a-p:hover #ch1 #ch2 #ch3 #ch4 #ch5 #ch6 #ch7 #ch8 {
   display: inline-block;
   animation: wave-text 5s ease-in-out infinite;
 }
 
 
-.a-p span:nth-child(2) {
+.a-p #ch2 {
   animation-delay: 0.0s;
 }
 
-.a-p span:nth-child(3) {
+.a-p #ch3 {
   animation-delay: 0.05s;
 }
 
-.a-p span:nth-child(4) {
+.a-p #ch4 {
   animation-delay: 0.1s;
 }
 
-.a-p span:nth-child(5) {
+.a-p #ch5 {
   animation-delay: 0.15s;
 }
 
-.a-p span:nth-child(6) {
+.a-p #ch6 {
   animation-delay: 0.2s;
 }
 
-.a-p span:nth-child(7) {
+.a-p #ch7 {
   animation-delay: 0.25s;
 }
 

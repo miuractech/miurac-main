@@ -1,19 +1,13 @@
-import HeroImg from '../../assets/img/hero.svg';
-import ITManagerImg from '../../assets/img/itManager.svg';
-import GoogleSheetImg from '../../assets/img/googleSheet.svg';
-import ScaleBusinessImg from '../../assets/img/scale.svg';
-import PayingMoreImg from '../../assets/img/pay.svg';
-import CheapCostImg from '../../assets/img/cheap cost.svg';
-import FastSetupImg from '../../assets/img/fast setup.svg';
-import ModernSoftwareImg from '../../assets/img/modern software.svg';
-import TailorFitImg from '../../assets/img/tailor fit.svg';
-import InternalToolImg from '../../assets/img/internal tool.svg';
-import CustomAppsImg from '../../assets/img/custom apps.svg';
+import HeroImg from '../../assets/img/internal tool.png';
+import ITManagerImg from '../../assets/img/itManager.png';
+import GoogleSheetImg from '../../assets/img/googleSheet.png';
+import ScaleBusinessImg from '../../assets/img/scale.png';
+import PayingMoreImg from '../../assets/img/pay.png';
 
 export const pagesInfo = [
   {
     id: 'home',
-    bgColor: '#FBEDEA',
+    bgColor: '#cbd9ff',
     text: 'From Garage to \n Ipo',
     img: HeroImg,
     centerAlignText: true,
@@ -76,89 +70,17 @@ export const pagesInfo = [
     ),
     
   },
-  // {
-  //   id: 'paying-too-much',
-  //   bgColor: '#E9E3DC',
-  //   text: 'Paying too much for staffing?',
-  //   img: PayingMoreImg,
-  //   centerAlignText: false,
-  //   captionText: (
-  //     <>
-  //       <div>Computers work 24/7, dont complain and don&#39;t make errors.</div>
-  //       <div>Let smart intelligent systems handle your repetitive tasks.</div>
-  //     </>
-  //   ),
-   
-  // },
-  // {
-  //   id: 'Cheapest-cost',
-  //   bgColor: '#F6F4F3',
-  //   text: 'Cheapest cost you can find!',
-  //   img: CheapCostImg,
-  //   centerAlignText: false,
-  //   captionText: (
-  //     <>
-  //       We are the cheapest in the market. We can guarantee that.
-  //     </>
-  //   ),
-   
-  // },
-  // {
-  //   id: 'Lightning-fast',
-  //   bgColor: '#D3D8FF',
-  //   text: 'Lightning fast setup ',
-  //   img: FastSetupImg,
-  //   centerAlignText: false,
-  //   captionText: (
-  //     <>
-  //       <div>We setup your business/startups in matter of weeks</div>
-  //       <div>You need not have to wait several months to validate your idea. </div>
-  //     </>
-  //   ),
-   
-  // },
-  // {
-  //   id: 'modern-apps',
-  //   bgColor: '#C4EDE7',
-  //   text: 'Modern Apps and infrastructure.',
-  //   img: ModernSoftwareImg,
-  //   centerAlignText: false,
-  //   captionText: (
-  //     <>
-  //       <div>Industry leading tech stack that are used by tech giants like google, facebook, etc</div>
-  //       <div>Miurac updates and maintains your apps upto date.</div>
-  //     </>
-  //   ),
-   
-  // },
-  // {
-  //   id: 'tailor-fit',
-  //   bgColor: '#FFEDE8',
-  //   text: 'Tailor fit branding',
-  //   img: TailorFitImg,
-  //   centerAlignText: false,
-  //   captionText: (
-  //     <>
-  //       <div>Get your own brand identity that help you to stand out of the crowd.</div>
-  //       <div> Your idea is unique, so should your brand! </div>
-  //     </>
-  //   ),
-   
-  // },
-  // {
-  //   id: 'cit',
-  //   bgColor: '#CADEF2',
-  //   text: 'Complex Internal Tools made easy',
-  //   img: InternalToolImg,
-  //   centerAlignText: false,
-  //   captionText: (
-  //     <>
-  //       <div>We build anything from a simple user form, all the way to a rocket dashboard!</div>
-  //       {/* <div>Let smart intelligent systems handle your repetitive tasks.</div> */}
-  //     </>
-  //   ),
-   
-  // },
-
-  
+  {
+    id: 'paying-too-much',
+    bgColor: '#E9E3DC',
+    text: 'Paying too much for staffing?',
+    img: PayingMoreImg,
+    centerAlignText: false,
+    captionText: (
+      <>
+        <div>Computers work 24/7, dont complain and don&#39;t make errors.</div>
+        <div>Let smart intelligent systems handle your repetitive tasks.</div>
+      </>
+    ),
+  },  
 ];

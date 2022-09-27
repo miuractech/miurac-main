@@ -61,7 +61,7 @@ export default function TemplatePage({
         <Center className="md:h-full h-2/5 m-0 w-full">
           <img
             src={heroImage}
-            className="max-w-[700px] h-full max-h-[600px] md:w-full w-full block m-auto"
+            className="h-full max-h-[600px] md:max-w-full block m-auto"
             alt="landing"
           />
         </Center>

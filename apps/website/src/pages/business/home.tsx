@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 type Props = {};
 
 // eslint-disable-next-line no-empty-pattern
-export default function Home({}: Props) {
+export default function Business({}: Props) {
   const ref = useRef<HTMLDivElement>();
   const [fullScreen, setFullScreen] = useState(false);
   useEffect(() => {

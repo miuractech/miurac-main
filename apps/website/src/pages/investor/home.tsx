@@ -8,36 +8,23 @@ gsap.registerPlugin(ScrollTrigger);
 type Props = {};
 
 // eslint-disable-next-line no-empty-pattern
-export default function Home({}: Props) {
+export default function Investor({}: Props) {
   const ref = useRef<HTMLDivElement>();
   const [fullScreen, setFullScreen] = useState(false);
   useEffect(() => {
     const element = ref.current;
-    if (element ) {
+    if (element) {
       for (const p of pagesInfo) {
-          if(!fullScreen){
-          gsap.to(
-            element.querySelector(`#${p.id}`),
-            {
-              scrollTrigger: {
-                trigger: element.querySelector(`#${p.id}`),
-                start: 'top top',
-                pin: true,
-                pinSpacing: false,
-                // snap: 1,
-              },
-            }
-          );
+        gsap.to(element.querySelector(`#${p.id}`), {
+          scrollTrigger: {
+            trigger: element.querySelector(`#${p.id}`),
+            start: 'top top',
+            pin: true,
+            pinSpacing: false,
+            // snap: 1,
+          },
+        });
       }
-      else{
-        gsap.set(
-          element.querySelector(`#${p.id}`),
-          {
-            clearProps:"all"
-          }
-        );
-      }
-    }
     }
   }, [fullScreen]);
   return (
@@ -46,9 +33,8 @@ export default function Home({}: Props) {
       //@ts-ignore
       ref={ref}
     >
-        
       {pagesInfo.map(
-        ({ id, bgColor, text, img, centerAlignText, captionText, cta }) => (
+        ({ id, bgColor, text, img, centerAlignText, captionText }) => (
           <React.Fragment key={id}>
             <TemplatePage
               bgColor={bgColor}
@@ -57,7 +43,9 @@ export default function Home({}: Props) {
               captionText={captionText}
               heroImage={img}
               centerAlignText={centerAlignText}
-              cta={cta} fullScreen={fullScreen} setFullScreen={setFullScreen} />
+              fullScreen={fullScreen}
+              setFullScreen={setFullScreen}
+            />
           </React.Fragment>
         )
       )}

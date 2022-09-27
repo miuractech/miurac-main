@@ -9,6 +9,7 @@ import {
 } from '@tabler/icons';
 import { useMediaQuery } from '@mantine/hooks';
 import { Link } from 'react-router-dom';
+import { CTA } from './cta/cta';
 // import Logo from "@miurac/resources"
 // type Props = {
 //   children: JSX.Element;
@@ -16,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 export default function Topbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const media = useMediaQuery('(min-width: 900px)');
+  const [ctaOpen, setCtaOpen] = useState(false)
   return (
    <Header
           fixed
@@ -25,19 +26,22 @@ export default function Topbar() {
           p="xs"
           px="xl"
         >
-          <div className="flex items-center">
-            <Logo height={40} imgProps={{ className: 'mr-2' }} />
-            <span className="lato font-black text-3xl text-[#3C4043] a-c">
-              M
-            </span>
-            <span className="lato font-black text-3xl text-[#3C4043]">I</span>
-            <span className="lato font-black text-3xl text-[#3C4043]">U</span>
-            <span className="lato font-black text-3xl text-[#3C4043]">R</span>
-            <span className="lato font-black text-3xl text-[#3C4043]">A</span>
-            <span className="lato font-black text-3xl text-[#3C4043]">C</span>
+            <Link to='/'>
+          <div className="flex items-center cursor-pointer">
+              <Logo height={40} imgProps={{ className: 'mr-2' }} />
+              <span id="ch1" className="lato font-black text-3xl text-[#3C4043] a-c">
+                M
+              </span>
+              <span id="ch2" className="lato font-black text-3xl text-[#3C4043]">I</span>
+              <span id="ch3" className="lato font-black text-3xl text-[#3C4043]">U</span>
+              <span id="ch4" className="lato font-black text-3xl text-[#3C4043]">R</span>
+              <span id="ch5" className="lato font-black text-3xl text-[#3C4043]">A</span>
+              <span id="ch6" className="lato font-black text-3xl text-[#3C4043]">C</span>
           </div>
-          <div>
-            <Burger opened={menuOpen} onClick={() => setMenuOpen(true)} />
+            </Link>
+          <div className='flex items-center gap-5' >
+          <CTA fullScreen={ctaOpen} setFullScreen={setCtaOpen} style={{height:40}} />
+            <Burger opened={menuOpen} onClick={() => setMenuOpen(true)}  />
             <Modal
               opened={menuOpen}
               size="100%"
@@ -68,13 +72,13 @@ export default function Topbar() {
                 />
                 <div className="flex flex-wrap w-full md:w-3/4 m-auto">
                   <div className="md:w-1/2 w-full md:-mt-1">
-                    {navItems.slice(0, 4).map(({ text }, index) => (
-                      <NavItemComponent index={index} text={text} />
+                    {navItems.slice(0, 4).map(({ text, link, onclick }, index) => (
+                      <NavItemComponent index={index} text={text} link={link} onclick={onclick} closeModal={() => setMenuOpen(false)} />
                     ))}
                   </div>
                   <div className="md:w-1/2 w-full">
-                    {navItems.slice(4, 8).map(({ text }, index) => (
-                      <NavItemComponent index={index+4} text={text} />
+                    {navItems.slice(4, 8).map(({ text, link, onclick }, index) => (
+                      <NavItemComponent index={index+4} text={text} link={link} onclick={onclick} closeModal={() => setMenuOpen(false)} />
                     ))}
                   </div>
                 </div>
@@ -99,14 +103,14 @@ export default function Topbar() {
 }
 
 const navItems = [
-  { text: 'Work', onclick: () => void 0, link: '' },
-  { text: 'Startup', onclick: () => void 0, link: '' },
-  { text: 'Business', onclick: () => void 0, link: '' },
-  { text: 'Investor', onclick: () => void 0, link: '' },
-  { text: 'About', onclick: () => void 0, link: '' },
-  { text: 'Login', onclick: () => void 0, link: '' },
-  { text: 'Careers', onclick: () => void 0, link: '' },
-  { text: 'Contact us', onclick: () => void 0, link: '' },
+  { text: 'Home', onclick: () => void 0, link: '/' },
+  { text: 'Why Miurac', onclick: () => void 0, link: '/why-miurac' },
+  { text: 'Startup', onclick: () => void 0, link: '/startup' },
+  { text: 'Business', onclick: () => void 0, link: '/business' },
+  { text: 'Investor', onclick: () => void 0, link: '/investor' },
+  { text: 'About', onclick: () => void 0, link: '/about' },
+  { text: 'Careers', onclick: () => void 0, link: '/career' },
+  { text: 'Contact us', onclick: () => void 0, link: '/contact' },
 ];
 
 export const socialItems = [
@@ -115,15 +119,23 @@ export const socialItems = [
   { icon: <IconBrandYoutube />, text: 'Youtube', link: '' },
 ];
 
-const NavItemComponent = ({ index, text }: { index: number; text: string }) => {
-  return (
-    <div className="md:p-8 p-3 hover:bg-[#434348] hover:text-white text-xl roie font-normal rounded-xl cursor-pointer">
+const NavItemComponent = ({ index, text, link,onclick, closeModal }: { index: number; text: string,link?:string, onclick:()=>void, closeModal:()=>void }) => {
+  const CoreComponent = () =>(
+    <div onClick={()=>{
+      onclick()
+      closeModal()
+    }} className="md:p-8 p-3 hover:bg-[#434348] hover:text-white text-xl roie font-normal rounded-xl cursor-pointer">
       <div className="block ml-10 ">
         <span className="text-sm"> 0{index + 1} &ensp;</span>
         <span>{text}</span>
       </div>
     </div>
-  );
+  )
+  if(link) return (<Link to={link}>
+    <CoreComponent />
+  </Link> 
+  )
+  else return <CoreComponent />
 };
 
 export const SocialLink = ({

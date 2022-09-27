@@ -17,7 +17,7 @@ import { useForm, yupResolver } from '@mantine/form';
 import { motion } from 'framer-motion';
 import * as yup from 'yup';
 import React from 'react';
-const Square = ({ toggleFullScreen }: { toggleFullScreen: () => void }) => {
+const Square = ({ toggleFullScreen, style }: { toggleFullScreen: () => void,style?:React.CSSProperties }) => {
   return (
     <Flipped flipId="square">
       <div
@@ -29,6 +29,7 @@ const Square = ({ toggleFullScreen }: { toggleFullScreen: () => void }) => {
           radius={'xl'}
           className="font-light"
           rightIcon={<IconChevronsRight />}
+          style={style}
         >
           Let's do this
         </Button>
@@ -66,21 +67,23 @@ const FullScreenSquare = ({
 export const CTA = ({
   fullScreen,
   setFullScreen,
+  style
 }: {
   fullScreen: boolean;
   setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  style?:React.CSSProperties
 }) => {
   const toggleFullScreen = () => setFullScreen((prevState) => !prevState);
   const matches = useMediaQuery('(min-width: 900px)');
   const id = React.useId()
   return (
-    <div id={React.useId()} className={`h-12`}>
+    <div id={React.useId()}>
       {matches ? (
         <Flipper flipKey={fullScreen} spring="veryGentle">
           {fullScreen ? (
             <FullScreenSquare toggleFullScreen={toggleFullScreen} />
           ) : (
-            <Square toggleFullScreen={toggleFullScreen} />
+            <Square style={style} toggleFullScreen={toggleFullScreen} />
           )}
         </Flipper>
       ) : (
@@ -91,6 +94,7 @@ export const CTA = ({
           className="font-light"
           rightIcon={<IconChevronsRight />}
           onClick={toggleFullScreen}
+          style={style}
         >
           Let's do this
         </Button>

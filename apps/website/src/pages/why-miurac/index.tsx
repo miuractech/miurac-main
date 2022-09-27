@@ -8,13 +8,14 @@ gsap.registerPlugin(ScrollTrigger);
 type Props = {};
 
 // eslint-disable-next-line no-empty-pattern
-export default function Home({}: Props) {
+export default function WhyMiurac({}: Props) {
   const ref = useRef<HTMLDivElement>();
   const [fullScreen, setFullScreen] = useState(false);
   useEffect(() => {
     const element = ref.current;
     if (element ) {
       for (const p of pagesInfo) {
+          if(!fullScreen){
           gsap.to(
             element.querySelector(`#${p.id}`),
             {
@@ -28,6 +29,15 @@ export default function Home({}: Props) {
             }
           );
       }
+      else{
+        gsap.set(
+          element.querySelector(`#${p.id}`),
+          {
+            clearProps:"all"
+          }
+        );
+      }
+    }
     }
   }, [fullScreen]);
   return (
@@ -38,7 +48,7 @@ export default function Home({}: Props) {
     >
         
       {pagesInfo.map(
-        ({ id, bgColor, text, img, centerAlignText, captionText, cta }) => (
+        ({ id, bgColor, text, img, centerAlignText, captionText }) => (
           <React.Fragment key={id}>
             <TemplatePage
               bgColor={bgColor}
@@ -47,7 +57,8 @@ export default function Home({}: Props) {
               captionText={captionText}
               heroImage={img}
               centerAlignText={centerAlignText}
-              cta={cta} fullScreen={fullScreen} setFullScreen={setFullScreen} />
+              // cta={cta} 
+              fullScreen={fullScreen} setFullScreen={setFullScreen} />
           </React.Fragment>
         )
       )}
