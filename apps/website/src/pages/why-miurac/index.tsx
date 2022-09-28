@@ -10,43 +10,28 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export default function WhyMiurac({}: Props) {
   const ref = useRef<HTMLDivElement>();
-  const [fullScreen, setFullScreen] = useState(false);
   useEffect(() => {
     const element = ref.current;
-    if (element ) {
+    if (element) {
       for (const p of pagesInfo) {
-          if(!fullScreen){
-          gsap.to(
-            element.querySelector(`#${p.id}`),
-            {
-              scrollTrigger: {
-                trigger: element.querySelector(`#${p.id}`),
-                start: 'top top',
-                pin: true,
-                pinSpacing: false,
-                // snap: 1,
-              },
-            }
-          );
-      }
-      else{
-        gsap.set(
-          element.querySelector(`#${p.id}`),
-          {
-            clearProps:"all"
-          }
-        );
+        gsap.to(element.querySelector(`#${p.id}`), {
+          scrollTrigger: {
+            trigger: element.querySelector(`#${p.id}`),
+            start: 'top top',
+            pin: true,
+            pinSpacing: false,
+            // snap: 1,
+          },
+        });
       }
     }
-    }
-  }, [fullScreen]);
+  }, []);
   return (
     <div
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       ref={ref}
     >
-        
       {pagesInfo.map(
         ({ id, bgColor, text, img, centerAlignText, captionText }) => (
           <React.Fragment key={id}>
@@ -56,9 +41,8 @@ export default function WhyMiurac({}: Props) {
               text={text}
               captionText={captionText}
               heroImage={img}
-              centerAlignText={centerAlignText}
-              // cta={cta} 
-              fullScreen={fullScreen} setFullScreen={setFullScreen} />
+              centerAlignText={centerAlignText} direction={'up'}              // cta={cta}
+            />
           </React.Fragment>
         )
       )}

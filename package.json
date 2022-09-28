@@ -39,6 +39,7 @@
     "react-konva": "^18.2.1",
     "react-medium-image-zoom": "^5.0.2",
     "react-router-dom": "^6.4.0",
+    "react-scroll-wheel-handler": "^2.2.0",
     "regenerator-runtime": "0.13.7",
     "tabler-icons-react": "^1.55.0",
     "tslib": "^2.3.0",

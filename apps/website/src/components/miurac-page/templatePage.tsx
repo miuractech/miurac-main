@@ -1,9 +1,10 @@
+import { motion } from 'framer-motion';
 import { Button, Center, Text } from '@mantine/core';
-import { SetStateAction, useState } from 'react';
 // import LazyImage from 'libs/resources/src/lib/LazyImage';
 // import { useState } from 'react';
 // import { AnimatedCTAButton } from '../animatedCTA';
 import { CTA } from '../cta/cta';
+import { useEffect } from 'react';
 type Props = {
   bgColor: string;
   id: string;
@@ -11,13 +12,12 @@ type Props = {
   heroImage: string;
   centerAlignText?: boolean;
   captionText: string | React.ReactNode;
+  direction: "up" | "down"
   cta?: {
     link?: string;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     buttonText: string | React.ReactNode;
   };
-  fullScreen: boolean;
-  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function TemplatePage({
@@ -27,18 +27,24 @@ export default function TemplatePage({
   heroImage,
   centerAlignText,
   captionText,
+  direction,
   cta,
-  fullScreen,
-  setFullScreen,
 }: Props) {
   // const [clicked, setClicked] = useState(false);
-
+  // useEffect(() => {
+    
+  // }, [])
+  
   return (
-    <div
+    <motion.div
       key={id}
       id={id}
-      className="w-full h-screen template-shadow"
-      style={{ backgroundColor: bgColor }}
+      className="w-screen template-shadow fixed"
+      style={{ backgroundColor: bgColor, height:"100vh" }}
+      initial={{ y: direction === 'up'? "100vh":"100vh", zIndex: direction === 'up'?100:0}}
+      animate={{ y: 0,  zIndex:direction === 'up'?10:100}}
+      exit={{  y:direction === 'up'?0:"100vh", zIndex:direction === 'up'?0:100 }}
+      transition={{duration:0.4,ease:'easeInOut'}}
     >
       <div className="h-16" />
       <div className="flex h-full flex-col-reverse md:flex-row">
@@ -54,7 +60,7 @@ export default function TemplatePage({
             <div>{captionText}</div>
             <br />
             {cta && (
-              <CTA fullScreen={fullScreen} setFullScreen={setFullScreen} />
+              <CTA />
             )}
           </div>
         </div>
@@ -66,6 +72,6 @@ export default function TemplatePage({
           />
         </Center>
       </div>
-    </div>
+    </motion.div>
   );
 }

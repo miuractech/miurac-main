@@ -9,7 +9,7 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/mockup-generator",
+        "outputPath": "dist/apps/mockup-generator/build",
         "index": "apps/mockup-generator/src/index.html",
         "baseHref": "/",
         "main": "apps/mockup-generator/src/main.tsx",

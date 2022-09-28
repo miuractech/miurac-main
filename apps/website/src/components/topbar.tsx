@@ -17,7 +17,6 @@ import { CTA } from './cta/cta';
 
 export default function Topbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [ctaOpen, setCtaOpen] = useState(false)
   return (
    <Header
           fixed
@@ -40,7 +39,7 @@ export default function Topbar() {
           </div>
             </Link>
           <div className='flex items-center gap-5' >
-          <CTA fullScreen={ctaOpen} setFullScreen={setCtaOpen} style={{height:40}} />
+          <CTA style={{height:40}} />
             <Burger opened={menuOpen} onClick={() => setMenuOpen(true)}  />
             <Modal
               opened={menuOpen}

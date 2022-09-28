@@ -17,21 +17,30 @@ import { useForm, yupResolver } from '@mantine/form';
 import { motion } from 'framer-motion';
 import * as yup from 'yup';
 import React from 'react';
-const Square = ({ toggleFullScreen, style }: { toggleFullScreen: () => void,style?:React.CSSProperties }) => {
+const Square = ({
+  toggleFullScreen,
+  style,
+}: {
+  toggleFullScreen: () => void;
+  style?: React.CSSProperties;
+}) => {
+  const matches = useMediaQuery('(min-width: 900px)');
   return (
     <Flipped flipId="square">
       <div
-        className="bg-transparent rounded-lg text-center m-auto md:m-0 w-[181px] h-16 flex items-center"
+        className={`bg-transparent rounded-lg text-center m-auto md:m-0 ${
+          matches ? 'w-[181px]' : 'w-min'
+        } h-16 flex items-center`}
         onClick={toggleFullScreen}
       >
         <Button
           size="lg"
           radius={'xl'}
           className="font-light"
-          rightIcon={<IconChevronsRight />}
+          rightIcon={matches && <IconChevronsRight />}
           style={style}
         >
-          Let's do this
+          {matches ? "Let's do this" : <IconChevronsRight />}
         </Button>
       </div>
     </Flipped>
@@ -49,6 +58,7 @@ const FullScreenSquare = ({
     <Flipped flipId="square" stagger={true}>
       <div
         ref={ref}
+        // style={{maxHeight:"calc(100vh - 60px)", overflowY:"auto"}}
         className="full-screen-square md:rounded-[40px] rounded-b-[40px] md:max-w-[1080px]"
       >
         <CloseButton
@@ -64,39 +74,32 @@ const FullScreenSquare = ({
   );
 };
 
-export const CTA = ({
-  fullScreen,
-  setFullScreen,
-  style
-}: {
-  fullScreen: boolean;
-  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
-  style?:React.CSSProperties
-}) => {
+export const CTA = ({ style }: { style?: React.CSSProperties }) => {
+  const [fullScreen, setFullScreen] = useState(false);
   const toggleFullScreen = () => setFullScreen((prevState) => !prevState);
-  const matches = useMediaQuery('(min-width: 900px)');
-  const id = React.useId()
+  // const matches = useMediaQuery('(min-width: 900px)');
+  const id = React.useId();
   return (
     <div id={React.useId()}>
-      {matches ? (
-        <Flipper flipKey={fullScreen} spring="veryGentle">
-          {fullScreen ? (
-            <FullScreenSquare toggleFullScreen={toggleFullScreen} />
-          ) : (
-            <Square style={style} toggleFullScreen={toggleFullScreen} />
-          )}
-        </Flipper>
-      ) : (
+      {/* {matches ? ( */}
+      <Flipper flipKey={fullScreen} spring="veryGentle">
+        {fullScreen ? (
+          <FullScreenSquare toggleFullScreen={toggleFullScreen} />
+        ) : (
+          <Square style={style} toggleFullScreen={toggleFullScreen} />
+        )}
+      </Flipper>
+      {/* ) : (
         <>
           <Button
-          size="lg"
+          size="lg" 
           radius={'xl'}
           className="font-light"
-          rightIcon={<IconChevronsRight />}
+
           onClick={toggleFullScreen}
           style={style}
         >
-          Let's do this
+          <IconChevronsRight />
         </Button>
           <Modal
             opened={fullScreen}
@@ -130,7 +133,7 @@ export const CTA = ({
             </div>
           </Modal>
         </>
-      )}
+      )} */}
     </div>
   );
 };
@@ -149,12 +152,10 @@ const CTAForm = () => {
       yup.object({
         name: yup.string().required(),
         email: yup.string().email(),
-        phone: yup
-          .string()
-          .matches(/^[6-9]\d{9}$/, {
-            message: 'Please enter valid number.',
-            excludeEmptyString: false,
-          }),
+        phone: yup.string().matches(/^[6-9]\d{9}$/, {
+          message: 'Please enter valid number.',
+          excludeEmptyString: false,
+        }),
         service: yup.string().required(),
       })
     ),

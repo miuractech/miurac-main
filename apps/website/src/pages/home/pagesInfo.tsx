@@ -4,7 +4,7 @@ import GoogleSheetImg from '../../assets/img/googleSheet.png';
 import ScaleBusinessImg from '../../assets/img/scale.png';
 import PayingMoreImg from '../../assets/img/pay.png';
 
-export const pagesInfo = [
+export const pagesInfo:pageInfo[] = [
   {
     id: 'home',
     bgColor: '#cbd9ff',
@@ -84,3 +84,17 @@ export const pagesInfo = [
     ),
   },  
 ];
+
+type pageInfo =  {
+  id: string;
+  bgColor: string;
+  text: string;
+  img: string;
+  centerAlignText: boolean;
+  captionText: React.ReactNode | JSX.Element;
+  cta?: {
+      onClick: () => undefined;
+      link: string;
+      buttonText: string;
+  };
+}

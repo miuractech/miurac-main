@@ -10,7 +10,6 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export default function Investor({}: Props) {
   const ref = useRef<HTMLDivElement>();
-  const [fullScreen, setFullScreen] = useState(false);
   useEffect(() => {
     const element = ref.current;
     if (element) {
@@ -26,7 +25,7 @@ export default function Investor({}: Props) {
         });
       }
     }
-  }, [fullScreen]);
+  }, []);
   return (
     <div
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -42,10 +41,7 @@ export default function Investor({}: Props) {
               text={text}
               captionText={captionText}
               heroImage={img}
-              centerAlignText={centerAlignText}
-              fullScreen={fullScreen}
-              setFullScreen={setFullScreen}
-            />
+              centerAlignText={centerAlignText} direction={'up'}            />
           </React.Fragment>
         )
       )}

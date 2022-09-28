@@ -10,10 +10,9 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export default function StartUp({}: Props) {
   const ref = useRef<HTMLDivElement>();
-  const [fullScreen, setFullScreen] = useState(false);
   useEffect(() => {
     const element = ref.current;
-    if (element ) {
+    if (element) {
       for (const p of pagesInfo) {
           gsap.to(
             element.querySelector(`#${p.id}`),
@@ -29,7 +28,7 @@ export default function StartUp({}: Props) {
           );
       }
     }
-  }, [fullScreen]);
+  }, []);
   return (
     <div
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -47,7 +46,7 @@ export default function StartUp({}: Props) {
               captionText={captionText}
               heroImage={img}
               centerAlignText={centerAlignText}
-              cta={cta} fullScreen={fullScreen} setFullScreen={setFullScreen} />
+              cta={cta} direction={'up'}/>
           </React.Fragment>
         )
       )}
