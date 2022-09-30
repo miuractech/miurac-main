@@ -4,6 +4,7 @@
   "projects": {
     "admin": "apps/admin",
     "admin-e2e": "apps/admin-e2e",
+    "miurac-files": "libs/miurac-files",
     "mockup-generator": "apps/mockup-generator",
     "mockup-generator-e2e": "apps/mockup-generator-e2e",
     "resources": "libs/resources",

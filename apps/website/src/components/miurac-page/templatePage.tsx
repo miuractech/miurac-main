@@ -1,10 +1,12 @@
-import { motion } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 import { Button, Center, Text } from '@mantine/core';
 // import LazyImage from 'libs/resources/src/lib/LazyImage';
 // import { useState } from 'react';
 // import { AnimatedCTAButton } from '../animatedCTA';
 import { CTA } from '../cta/cta';
-import { useEffect } from 'react';
+import Lottie from 'lottie-react';
+import scrollDownAnimation from '../../assets/lottie/scroll-down.json';
+import ScrollToTop from '../utils/ScrollToTop';
 type Props = {
   bgColor: string;
   id: string;
@@ -12,7 +14,10 @@ type Props = {
   heroImage: string;
   centerAlignText?: boolean;
   captionText: string | React.ReactNode;
-  direction: "up" | "down"
+  direction: 'up' | 'down';
+  showScrollAnimation?: boolean;
+  showScrollToTop?:boolean;
+  onScrollToTop?:()=>void;
   cta?: {
     link?: string;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -28,23 +33,31 @@ export default function TemplatePage({
   centerAlignText,
   captionText,
   direction,
+  showScrollToTop,
+  onScrollToTop,
   cta,
+  showScrollAnimation,
 }: Props) {
   // const [clicked, setClicked] = useState(false);
+  // const controls = useAnimationControls()
   // useEffect(() => {
-    
-  // }, [])
-  
+  //   if(exitDirection === 'up')  controls.start({ y: 0,  zIndex:0});
+  //   if(exitDirection === 'down')  controls.start({  y:direction === 'up'?0:"100vh", zIndex:direction === 'up'?0:100 });
+  // }, [exitDirection])
+
   return (
     <motion.div
       key={id}
       id={id}
       className="w-screen template-shadow fixed"
-      style={{ backgroundColor: bgColor, height:"100vh" }}
-      initial={{ y: direction === 'up'? "100vh":"100vh", zIndex: direction === 'up'?100:0}}
-      animate={{ y: 0,  zIndex:direction === 'up'?10:100}}
-      exit={{  y:direction === 'up'?0:"100vh", zIndex:direction === 'up'?0:100 }}
-      transition={{duration:0.4,ease:'easeInOut'}}
+      style={{ background: bgColor, height: '100vh' }}
+      initial={{
+        y: direction === 'up' ? '100vh' : '-100vh',
+        zIndex: direction === 'up' ? 20 : 0,
+      }}
+      animate={{ y: 0, zIndex: 10 }}
+      exit={{ y: 0, zIndex: 0, transition: { duration: 0.4 } }}
+      transition={{ duration: 0.4, ease: 'easeInOut' }}
     >
       <div className="h-16" />
       <div className="flex h-full flex-col-reverse md:flex-row">
@@ -59,9 +72,7 @@ export default function TemplatePage({
           <div className="mx-3 md:ml-20 md:text-left text-md abeezee text-center">
             <div>{captionText}</div>
             <br />
-            {cta && (
-              <CTA />
-            )}
+            {cta && <CTA id={id} />}
           </div>
         </div>
         <Center className="md:h-full h-2/5 m-0 w-full">
@@ -71,6 +82,13 @@ export default function TemplatePage({
             alt="landing"
           />
         </Center>
+        {showScrollAnimation && (
+          <Lottie
+            className="fixed md:bottom-8 bottom-32 z-50 w-32 -left-8 md:left-1/2"
+            animationData={scrollDownAnimation}
+          />
+        )}
+       {/* <ScrollToTop visible={count.current > 0}  onClick={()=> onScrollToTop()} /> */}
       </div>
     </motion.div>
   );

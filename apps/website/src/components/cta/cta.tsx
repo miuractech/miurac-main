@@ -11,12 +11,18 @@ import {
   Title,
   useMantineTheme,
 } from '@mantine/core';
-import { IconChevronsRight } from '@tabler/icons';
+import { IconChevronsRight, IconX } from '@tabler/icons';
 import { useClickOutside, useMediaQuery } from '@mantine/hooks';
 import { useForm, yupResolver } from '@mantine/form';
 import { motion } from 'framer-motion';
 import * as yup from 'yup';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../app/store';
+import { closeCTA, openCTA } from './ctaRedux';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../config/firebaseConfig';
+import { showNotification } from '@mantine/notifications';
 const Square = ({
   toggleFullScreen,
   style,
@@ -25,10 +31,11 @@ const Square = ({
   style?: React.CSSProperties;
 }) => {
   const matches = useMediaQuery('(min-width: 900px)');
+
   return (
     <Flipped flipId="square">
       <div
-        className={`bg-transparent rounded-lg text-center m-auto md:m-0 ${
+        className={`bg-transparent scroll rounded-lg text-center m-auto md:m-0 ${
           matches ? 'w-[181px]' : 'w-min'
         } h-16 flex items-center`}
         onClick={toggleFullScreen}
@@ -53,13 +60,12 @@ const FullScreenSquare = ({
   toggleFullScreen: () => void;
 }) => {
   const ref = useClickOutside(() => toggleFullScreen());
-
   return (
     <Flipped flipId="square" stagger={true}>
       <div
         ref={ref}
         // style={{maxHeight:"calc(100vh - 60px)", overflowY:"auto"}}
-        className="full-screen-square md:rounded-[40px] rounded-b-[40px] md:max-w-[1080px]"
+        className="full-screen-square py-5 scroll pt-8 md:rounded-[30px] rounded-b-[40px] md:max-w-[1080px] overflow-y-auto"
       >
         <CloseButton
           size={'xl'}
@@ -74,19 +80,27 @@ const FullScreenSquare = ({
   );
 };
 
-export const CTA = ({ style }: { style?: React.CSSProperties }) => {
-  const [fullScreen, setFullScreen] = useState(false);
-  const toggleFullScreen = () => setFullScreen((prevState) => !prevState);
-  // const matches = useMediaQuery('(min-width: 900px)');
-  const id = React.useId();
+export const CTA = ({
+  style,
+  id,
+}: {
+  style?: React.CSSProperties;
+  id: string;
+}) => {
+  const fullScreen = useSelector((state: RootState) => state.toogleCta);
+  const dispatch = useAppDispatch();
+
   return (
     <div id={React.useId()}>
       {/* {matches ? ( */}
-      <Flipper flipKey={fullScreen} spring="veryGentle">
-        {fullScreen ? (
-          <FullScreenSquare toggleFullScreen={toggleFullScreen} />
+      <Flipper flipKey={fullScreen === id} spring="veryGentle">
+        {fullScreen === id ? (
+          <FullScreenSquare toggleFullScreen={() => dispatch(closeCTA())} />
         ) : (
-          <Square style={style} toggleFullScreen={toggleFullScreen} />
+          <Square
+            style={style}
+            toggleFullScreen={() => dispatch(openCTA(id))}
+          />
         )}
       </Flipper>
       {/* ) : (
@@ -150,7 +164,7 @@ const CTAForm = () => {
 
     validate: yupResolver(
       yup.object({
-        name: yup.string().required(),
+        name: yup.string().min(5).required(),
         email: yup.string().email(),
         phone: yup.string().matches(/^[6-9]\d{9}$/, {
           message: 'Please enter valid number.',
@@ -160,31 +174,66 @@ const CTAForm = () => {
       })
     ),
   });
+  const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch()
   return (
-    <div className=" md:px-24 md:text-2xl md:pt-14 text-sm  text-center leading-[48px] md:leading-[72px] m-auto w-[312px] md:w-4/5">
+    <form
+      className="scroll md:px-24 md:text-2xl text-sm text-center leading-[48px] md:leading-[72px] m-auto w-[312px] md:w-4/5"
+      onSubmit={form.onSubmit(async(data) => {
+        try {
+          setLoading(true)
+          await addDoc(collection(db,"enquiry"),data)
+          dispatch(closeCTA())
+          showNotification({
+            id: `reg-err-${Math.random()}`,
+            autoClose: 5000,
+            title: 'Success',
+            message: 'successfully submitted.',
+            color: 'dark',
+            icon: <IconX />,
+            loading: false,
+          });
+        } catch (error) {
+          setLoading(false)
+          showNotification({
+            id: `reg-err-${Math.random()}`,
+            autoClose: 5000,
+            title: 'Failed',
+            message: 'Unexpected error! try again.',
+            color: 'red',
+            icon: <IconX />,
+            loading: false,
+          });
+        }
+      })}
+    >
       <Title
         align="center"
         className="md:text-3xl text-white text-2xl pb-4 md:pb-8"
       >
         Connect with us
       </Title>
-      <div className="text-justify roie ">
-        Hello, my name is{' '}
+      <div className="text-justify roie">
+        <span>Hello, my name is </span>
         <TextInput
           className="border-[#9DAABE] inline-block border-solid border-b-2 border-t-0 border-r-0 border-l-0 w-44 md:w-56"
           classNames={{
             input: 'text-white abeezee text-lg leading-tight input-box',
+            error: '-mb-4',
           }}
+          required
           placeholder="Your name"
           variant="unstyled"
           {...form.getInputProps('name')}
+          error={form.errors['name']}
         />
         and I want to discuss a potential project. You can email me at{' '}
         <TextInput
-          className="border-[#9DAABE] inline-block border-solid border-b-2 border-t-0 border-r-0 border-l-0 w-48 md:w-56"
+          className="border-[#9DAABE] inline-block border-solid border-b-2 border-t-0 border-r-0 border-l-0 w-48 md:w-[410px]"
           placeholder="Email"
           classNames={{
             input: 'text-white abeezee text-lg leading-tight input-box',
+            error: '-mb-4',
           }}
           variant="unstyled"
           {...form.getInputProps('email')}
@@ -195,69 +244,79 @@ const CTAForm = () => {
           placeholder="Phone"
           classNames={{
             input: 'text-white abeezee text-lg leading-tight input-box',
+            error: '-mb-4',
           }}
           variant="unstyled"
           {...form.getInputProps('phone')}
         />
-        I am interested in{' '}
+        I am a{' '}
         <Chip
-          value="Branding"
+          value="startup"
+          checked={form.values.service === 'startup'}
+          onChange={(c) => {
+            if (c) form.setFieldValue('service', 'startup');
+          }}
           classNames={{
-            root: `${
-              form.values.service === 'Branding' ? 'bg-[#FBFBFD]' : 'bg-green'
-            }`,
+            input: 'bg-[#FBFBFD]',
           }}
           className="inline-block m-1"
         >
-          Branding
+          Start Up
         </Chip>
         <Chip
-          value="2"
+          value="business"
+          checked={form.values.service === 'business'}
+          onChange={(c) => {
+            if (c) form.setFieldValue('service', 'business');
+          }}
           classNames={{ input: 'bg-[#FBFBFD]' }}
           className="inline-block m-1"
         >
-          Web apps
+          Business
         </Chip>
         <Chip
-          value="3"
+          value="investor"
+          checked={form.values.service === 'investor'}
+          onChange={(c) => {
+            if (c) form.setFieldValue('service', 'investor');
+          }}
           classNames={{ input: 'bg-[#FBFBFD]' }}
           className="inline-block m-1"
         >
-          Internal tools
+          Investor
         </Chip>
         <Chip
-          value="3"
+          value="other"
+          checked={form.values.service === 'other'}
+          onChange={(c) => {
+            if (c) form.setFieldValue('service', 'other');
+          }}
           classNames={{ input: 'bg-[#FBFBFD]' }}
           className="inline-block m-1"
         >
           Others
         </Chip>
-        {/* <Chip value="3" classNames={{input:"bg-[#FBFBFD]"}} className="inline-block m-1">
-                    At a time
-                  </Chip> */}
-        {/* <Chip.Group position="center" className="inline-block py-3" onChange={(v)=>console.log(v)} >
-                </Chip.Group> */}
-        {/* <span className='inline-block' >
-              </span> */}
         . A little brief about my project :
         <TextInput
           className="border-gray-400 inline-block border-solid border-b-2 border-t-0 border-r-0 border-l-0 w-full"
           placeholder="explain your project"
           classNames={{
             input: 'text-white abeezee text-lg leading-tight input-box',
+            error: '-mb-4',
           }}
           variant="unstyled"
           {...form.getInputProps('message')}
         />
       </div>
-      <br />
       <Button
         size="lg"
-        className="font-light bg-gray-200 text-black rounded-full hover:bg-white"
+        loading={loading}
+        className="font-light bg-gray-200 text-black rounded-full hover:bg-white my-3"
         rightIcon={<IconChevronsRight />}
+        type="submit"
       >
         Let's do this
       </Button>
-    </div>
+    </form>
   );
 };

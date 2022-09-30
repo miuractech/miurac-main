@@ -3,7 +3,10 @@ import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Topbar from '../components/topbar';
 import ScrollToTop from '../components/utils/ScrollToTop';
+import About from '../pages/about-us';
 import Business from '../pages/business/home';
+import Careers from '../pages/careers/careers';
+import Contact from '../pages/contact/contact';
 import StartUp from '../pages/startup/home';
 const Home = React.lazy(() => import('../pages/home/home'));
 const WhyMiurac = React.lazy(() => import('../pages/why-miurac'));
@@ -61,10 +64,33 @@ export function App() {
               </div>
             }
           />
+          <Route
+            path={'/about'}
+            element={
+              <div>
+                <About />
+              </div>
+            }
+          />
+          <Route
+            path={'/career'}
+            element={
+              <div>
+                <Careers />
+              </div>
+            }
+          />
+          <Route
+            path={'/contact'}
+            element={
+              <div>
+                <Contact />
+              </div>
+            }
+          />
           <Route path={'*'} element={<Navigate to={'/'} />} />
         </Routes>
       </Suspense>
-      <ScrollToTop />
     </div>
   );
 }

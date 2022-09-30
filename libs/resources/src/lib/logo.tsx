@@ -9,6 +9,6 @@ type Props = {
 
 export function Logo({height,width, dark,imgProps}: Props) {
   return (
-    <img src={LOGO} style={{width:width??'auto', height:height??60}} alt="Edufeat-logo" {...imgProps} />
+    <img src={LOGO} style={{width:width??'auto', height:height??"unset"}} alt="Edufeat-logo" {...imgProps} />
   )
 }

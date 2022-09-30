@@ -9,6 +9,7 @@
   cursor: pointer;
   background-color: #202025;
   color: #9DAABE;
+  max-height: calc(100vh - 200px);
 }
 @media only screen and (max-width: 770px) {
   .full-screen-square {

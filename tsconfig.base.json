@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@miurac/miurac-files": ["libs/miurac-files/src/index.ts"],
       "@miurac/resources": ["libs/resources/src/index.ts"]
     }
   },

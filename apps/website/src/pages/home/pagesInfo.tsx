@@ -4,7 +4,7 @@ import GoogleSheetImg from '../../assets/img/googleSheet.png';
 import ScaleBusinessImg from '../../assets/img/scale.png';
 import PayingMoreImg from '../../assets/img/pay.png';
 
-export const pagesInfo:pageInfo[] = [
+export const pagesInfo: pageInfo[] = [
   {
     id: 'home',
     bgColor: '#cbd9ff',
@@ -32,12 +32,11 @@ export const pagesInfo:pageInfo[] = [
         <div>Focus on business and let us take care of your tech</div>
       </>
     ),
-   
   },
   {
     id: 'google-sheet',
     bgColor: '#DDEBFF',
-    text: 'Don\'t spend time scrolling Google sheets?',
+    text: "Don't spend time scrolling Google sheets?",
     img: GoogleSheetImg,
     centerAlignText: false,
     captionText: (
@@ -51,7 +50,6 @@ export const pagesInfo:pageInfo[] = [
         </div>
       </>
     ),
-   
   },
   {
     id: 'scale-swiftly',
@@ -63,12 +61,11 @@ export const pagesInfo:pageInfo[] = [
       <>
         <div>Be prepared for a huge traffic as you may go viral any time.</div>
         <div>
-          Whether it&#39;s 100 users or 100,000,000 users, we will help you scale
-          seamlessly
+          Whether it&#39;s 100 users or 100,000,000 users, we will help you
+          scale seamlessly
         </div>
       </>
     ),
-    
   },
   {
     id: 'paying-too-much',
@@ -82,10 +79,10 @@ export const pagesInfo:pageInfo[] = [
         <div>Let smart intelligent systems handle your repetitive tasks.</div>
       </>
     ),
-  },  
+  },
 ];
 
-type pageInfo =  {
+type pageInfo = {
   id: string;
   bgColor: string;
   text: string;
@@ -93,8 +90,8 @@ type pageInfo =  {
   centerAlignText: boolean;
   captionText: React.ReactNode | JSX.Element;
   cta?: {
-      onClick: () => undefined;
-      link: string;
-      buttonText: string;
+    onClick: () => undefined;
+    link: string;
+    buttonText: string;
   };
-}
+};

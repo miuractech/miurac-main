@@ -13,5 +13,5 @@ export const pagesInfo = [
       link: ``,
       buttonText: "Let's start now",
     },
-  },  
+  },
 ];

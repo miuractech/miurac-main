@@ -12,12 +12,7 @@ export const pagesInfo = [
     text: 'Cheapest cost you can find!',
     img: CheapCostImg,
     centerAlignText: false,
-    captionText: (
-      <>
-        We are the cheapest in the market. We can guarantee that.
-      </>
-    ),
-   
+    captionText: <>We are the cheapest in the market. We can guarantee that.</>,
   },
   {
     id: 'Lightning-fast',
@@ -28,10 +23,11 @@ export const pagesInfo = [
     captionText: (
       <>
         <div>We setup your business/startups in matter of weeks</div>
-        <div>You need not have to wait several months to validate your idea. </div>
+        <div>
+          You need not have to wait several months to validate your idea.{' '}
+        </div>
       </>
     ),
-   
   },
   {
     id: 'modern-apps',
@@ -41,11 +37,13 @@ export const pagesInfo = [
     centerAlignText: false,
     captionText: (
       <>
-        <div>Industry leading tech stack that are used by tech giants like google, facebook, etc</div>
+        <div>
+          Industry leading tech stack that are used by tech giants like google,
+          facebook, etc
+        </div>
         <div>Miurac updates and maintains your apps upto date.</div>
       </>
     ),
-   
   },
   {
     id: 'tailor-fit',
@@ -55,11 +53,12 @@ export const pagesInfo = [
     centerAlignText: false,
     captionText: (
       <>
-        <div>Get your own brand identity that help you to stand out of the crowd.</div>
+        <div>
+          Get your own brand identity that help you to stand out of the crowd.
+        </div>
         <div> Your idea is unique, so should your brand! </div>
       </>
     ),
-   
   },
   {
     id: 'cit',
@@ -69,11 +68,13 @@ export const pagesInfo = [
     centerAlignText: false,
     captionText: (
       <>
-        <div>We build anything from a simple user form, all the way to a rocket dashboard!</div>
+        <div>
+          We build anything from a simple user form, all the way to a rocket
+          dashboard!
+        </div>
         {/* <div>Let smart intelligent systems handle your repetitive tasks.</div> */}
       </>
     ),
-   
   },
   {
     id: 'custom-apps',
@@ -83,10 +84,12 @@ export const pagesInfo = [
     centerAlignText: false,
     captionText: (
       <>
-        <div>Tailor-made apps for your business needs and customise your apps to reflect your brand identity.</div>
+        <div>
+          Tailor-made apps for your business needs and customise your apps to
+          reflect your brand identity.
+        </div>
         {/* <div>Let smart intelligent systems handle your repetitive tasks.</div> */}
       </>
     ),
-   
   },
 ];

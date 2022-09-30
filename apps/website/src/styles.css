@@ -102,45 +102,45 @@ body {
   text-shadow: -5px 5px 10px rgba(209, 217, 230, 0.2), 5px -5px 10px rgba(209, 217, 230, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.35), 5px 5px 13px rgba(209, 217, 230, 0.9);
 }
 
-::-webkit-scrollbar {
+.scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 16px;
+}
+
+.scroll::-webkit-scrollbar-button {
   width: 12px;
   height: 12px;
 }
 
-::-webkit-scrollbar-button {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-thumb {
+.scroll::-webkit-scrollbar-thumb {
   background: #e1e1e1;
   border: 0px none #ffffff;
   border-radius: 50px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.scroll::-webkit-scrollbar-thumb:hover {
   background: #ffffff;
 }
 
-::-webkit-scrollbar-thumb:active {
+.scroll::-webkit-scrollbar-thumb:active {
   background: #000000;
 }
 
-::-webkit-scrollbar-track {
+.scroll::-webkit-scrollbar-track {
   background: #666666;
   border: 0px none #ffffff;
   border-radius: 50px;
 }
 
-::-webkit-scrollbar-track:hover {
+.scroll::-webkit-scrollbar-track:hover {
   background: #666666;
 }
 
-::-webkit-scrollbar-track:active {
+.scroll::-webkit-scrollbar-track:active {
   background: #333333;
 }
 
-::-webkit-scrollbar-corner {
+.scroll::-webkit-scrollbar-corner {
   background: transparent;
 }
 

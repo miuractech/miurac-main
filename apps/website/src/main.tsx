@@ -1,8 +1,10 @@
 import { MantineProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import { AnimateSharedLayout } from 'framer-motion';
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-
+import { Provider } from 'react-redux';
+import store from './app/store';
 import App from './app/app';
 
 const root = ReactDOM.createRoot(
@@ -36,9 +38,13 @@ root.render(
         },
       }}
     >
-      <AnimateSharedLayout>
-        <App />
-      </AnimateSharedLayout>
+      <Provider store={store}>
+        <NotificationsProvider>
+          <AnimateSharedLayout>
+            <App />
+          </AnimateSharedLayout>
+        </NotificationsProvider>
+      </Provider>
     </MantineProvider>
   </BrowserRouter>
 );

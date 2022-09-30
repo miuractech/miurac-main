@@ -11,7 +11,8 @@ export const pagesInfo = [
     text: 'Reach out to global audience in a touch',
     img: BusinessImg,
     centerAlignText: true,
-    captionText: 'We set up your end to end online business so you can scale to your growing demands',
+    captionText:
+      'We set up your end to end online business so you can scale to your growing demands',
     cta: {
       onClick: () => void 0,
       link: ``,
