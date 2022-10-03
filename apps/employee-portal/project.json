@@ -1,0 +1,83 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/employee-portal/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/employee-portal",
+        "index": "apps/employee-portal/src/index.html",
+        "baseHref": "/",
+        "main": "apps/employee-portal/src/main.tsx",
+        "polyfills": "apps/employee-portal/src/polyfills.ts",
+        "tsConfig": "apps/employee-portal/tsconfig.app.json",
+        "assets": [
+          "apps/employee-portal/src/favicon.ico",
+          "apps/employee-portal/src/assets"
+        ],
+        "styles": ["apps/employee-portal/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/employee-portal/src/environments/environment.ts",
+              "with": "apps/employee-portal/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "employee-portal:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "employee-portal:build:development"
+        },
+        "production": {
+          "buildTarget": "employee-portal:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/employee-portal/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/employee-portal"],
+      "options": {
+        "jestConfig": "apps/employee-portal/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

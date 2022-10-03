@@ -1,1 +1,16 @@
+@import url(https://fonts.googleapis.com/css?family=ABeeZee:regular,italic);
+@tailwind components;
+/* @tailwind base; */
+@tailwind utilities;
 /* You can add global styles to this file, and also import other style files */
+body{
+    font-family: Roie;
+    font-weight: 400;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.abeezee{
+    font-family: Abeezee;
+}
