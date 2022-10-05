@@ -30,22 +30,22 @@ root.render(
           ],
         },
         primaryColor: 'miuracBlack',
-        fontFamily: 'Roie',
+        fontFamily: 'Abeezee',
         defaultRadius: 8,
         headings: {
-          fontFamily: 'Roie',
+          fontFamily: 'Abeezee',
           fontWeight: 500,
         },
-        // components:{
-        //   Button: {
-            
-        //     defaultProps: {
-        //       fontWeight: 400,
-        //     },
-        //   }
-        // }
+        components:{
+          Modal: {
+            defaultProps: {
+              transition:'slide-down',
+              transitionDuration:600
+            },
+          }
+        }
       }}
-    >
+    > 
       <Provider store={store}>
         <NotificationsProvider>
           <AnimateSharedLayout>

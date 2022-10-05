@@ -3,8 +3,8 @@ import { useForm, yupResolver } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { employeeAccess } from '@miurac/resources';
 import { IconX } from '@tabler/icons';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { useState } from 'react';
 import * as yup from 'yup';
 import { db } from '../../config/firebaseConfig';
 import { defaultErrorMessage } from '../../constants';
@@ -16,9 +16,9 @@ export default function AddEmployee({}: Props) {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const form = useForm<{
-    email: string
-    name: string
-    access: string[]
+    email: string;
+    name: string;
+    access: string[];
   }>({
     initialValues: {
       email: '',
@@ -97,7 +97,9 @@ export default function AddEmployee({}: Props) {
             ))}
           </Checkbox.Group>
           <br />
-          <Button loading={loading} type="submit">Add Employee</Button>
+          <Button loading={loading} type="submit">
+            Add Employee
+          </Button>
         </form>
       </Modal>
     </div>

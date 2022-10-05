@@ -12,23 +12,23 @@ export const employeeAccesses = [
 
 const grantRole = async (email: string, access: string[]): Promise<void> => {
   const user = await auth.getUserByEmail(email);
-  const newAccess: { [key: string]: boolean } = {};
-  for (const field of employeeAccesses) {
-    newAccess[field.value] = false;
-  }
-  for (const acc of access) {
-    newAccess[acc] = true;
-  }
-  console.log("newAccess", newAccess);
-  return auth.setCustomUserClaims(user.uid, newAccess);
+  // const newAccess: { [key: string]: boolean } = {};
+  // for (const field of employeeAccesses) {
+  //   newAccess[field.value] = false;
+  // }
+  // for (const acc of access) {
+  //   newAccess[acc] = true;
+  // }
+  // console.log("newAccess", newAccess);
+  return auth.setCustomUserClaims(user.uid, {access: JSON.stringify(access)});
 };
 
 export const addEmployeeAccess = functions
     .region("asia-south1")
-    .runWith({
-      timeoutSeconds: 300,
-    })
-    .firestore.document("staff/{email}")
+    // .runWith({
+    //   timeoutSeconds: 300,
+    // })
+    .firestore.document("employees/{email}")
     .onWrite(async (change) => {
       const newData = change.after.data() as staffType;
       return await grantRole(newData.email, newData.access);

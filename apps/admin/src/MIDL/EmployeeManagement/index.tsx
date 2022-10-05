@@ -133,26 +133,6 @@ export default function Employee({}: Props) {
               className={`${mediaQuery ? 'w-28' : 'w-12'}`}
               variant="outline"
               size={mediaQuery ? 'sm' : 'xs'}
-              //   onClick={async () => {
-              //     try {
-              //       const docref = doc(db, 'staff', row.id);
-              //       await updateDoc(docref, {
-              //         status: 'rejectInform',
-              //       });
-              //       await addDoc(collection(db, 'mail'), {
-              //         to: [row.email],
-              //         template: {
-              //           name: 'Tutor rejected',
-              //           data: {
-              //             name: row.name,
-              //           },
-              //         },
-              //       });
-              //       window.location.reload();
-              //     } catch (error) {
-              //       console.log(error);
-              //     }
-              //   }}
             >
               <IconX />
               {mediaQuery && <>Delete</>}

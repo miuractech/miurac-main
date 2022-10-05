@@ -54,6 +54,7 @@
         "buildTarget": "mockup-generator:build",
         "hmr": true,
         "host":"0.0.0.0",
+        "port":4203
       },
       "configurations": {
         "development": {

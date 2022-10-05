@@ -9,7 +9,7 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/employee-portal",
+        "outputPath": "dist/apps/employee-portal/build",
         "index": "apps/employee-portal/src/index.html",
         "baseHref": "/",
         "main": "apps/employee-portal/src/main.tsx",
@@ -21,7 +21,8 @@
         ],
         "styles": ["apps/employee-portal/src/styles.css"],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "@nrwl/react/plugins/webpack",
+        "postcssConfig": "apps/employee-portal/postcss.config.js"
       },
       "configurations": {
         "development": {
@@ -52,7 +53,8 @@
       "options": {
         "buildTarget": "employee-portal:build",
         "hmr": true,
-        "host":"0.0.0.0",
+        "host": "0.0.0.0",
+        "port": 4201
       },
       "configurations": {
         "development": {

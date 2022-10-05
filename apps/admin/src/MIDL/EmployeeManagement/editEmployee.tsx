@@ -70,6 +70,7 @@ export default function EditEmployee({ data, setData }: Props) {
               icon: <IconX />,
               loading: false,
             });
+            window.location.reload()
           } catch (err) {
             console.log(err);
             showNotification({
