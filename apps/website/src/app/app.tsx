@@ -13,7 +13,7 @@ const Investor = React.lazy(() => import('../pages/investor/home'));
 
 export function App() {
   return (
-    <div>
+    <div >
       <Topbar />
       <Suspense
         fallback={
@@ -26,7 +26,7 @@ export function App() {
           <Route
             path={'/'}
             element={
-              <div>
+              <div >
                 <Home />
               </div>
             }

@@ -15,7 +15,7 @@ type Props = {};
 export default function AddEmployee({}: Props) {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const form = useForm<{
+  const form = useForm<{ 
     email: string;
     name: string;
     access: string[];

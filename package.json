@@ -43,6 +43,7 @@
     "react-flip-toolkit": "^7.0.16",
     "react-konva": "^18.2.1",
     "react-medium-image-zoom": "^5.0.2",
+    "react-phone-number-input": "^3.2.11",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.0",
     "react-scroll-wheel-handler": "^2.2.0",

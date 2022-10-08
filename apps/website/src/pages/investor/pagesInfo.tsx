@@ -10,7 +10,10 @@ export const pagesInfo = [
     bgColor: '#cbd9ff',
     text: 'Make your investment safe. Don\'t invest in ideas , Invest in progress!',
     img: InvestorImg,
-    centerAlignText: true,
+    centerAlignText: false,
     captionText: '',
+    cta:{
+      text:""
+    }
   },  
 ];

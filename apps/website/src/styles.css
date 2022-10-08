@@ -144,8 +144,8 @@ body {
   background: transparent;
 }
 
-html, body {
+/* html, body {
   position: fixed;
   overflow: hidden;
   overscroll-behavior-y: none;
-}
+} */

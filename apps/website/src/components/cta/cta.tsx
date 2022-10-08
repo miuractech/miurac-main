@@ -89,11 +89,11 @@ export const CTA = ({
 }) => {
   const fullScreen = useSelector((state: RootState) => state.toogleCta);
   const dispatch = useAppDispatch();
-
+  const matches = useMediaQuery('(min-width: 900px)');
   return (
     <div id={React.useId()}>
       {/* {matches ? ( */}
-      <Flipper flipKey={fullScreen === id} spring="veryGentle">
+      {/* <Flipper flipKey={fullScreen === id} spring="veryGentle">
         {fullScreen === id ? (
           <FullScreenSquare toggleFullScreen={() => dispatch(closeCTA())} />
         ) : (
@@ -102,25 +102,25 @@ export const CTA = ({
             toggleFullScreen={() => dispatch(openCTA(id))}
           />
         )}
-      </Flipper>
-      {/* ) : (
-        <>
-          <Button
+      </Flipper> */}
+       {/* ) : ( */}
+        <Button
           size="lg" 
           radius={'xl'}
           className="font-light"
 
-          onClick={toggleFullScreen}
+          onClick={() => dispatch(openCTA(id))}
           style={style}
         >
-          <IconChevronsRight />
+         {matches&&"Let's Go"} <IconChevronsRight />
         </Button>
           <Modal
-            opened={fullScreen}
+            opened={Boolean(fullScreen)}
             size="100%"
             transition={'slide-down'}
-            transitionTimingFunction="linear"
-            onClose={toggleFullScreen}
+            transitionTimingFunction="ease-in-out"
+            transitionDuration={600}
+            onClose={() => dispatch(closeCTA())}
             // className="-mt-12 "
             withCloseButton={false}
             classNames={{
@@ -140,14 +140,13 @@ export const CTA = ({
                 className="absolute right-0 -top-12"
                 size={'sm'}
                 color="white"
-                opened={fullScreen}
-                onClick={toggleFullScreen}
+                opened={Boolean(fullScreen)}
+                onClick={() => dispatch(closeCTA())}
               />
               <CTAForm />
             </div>
           </Modal>
-        </>
-      )} */}
+      {/* )} */}
     </div>
   );
 };
@@ -296,10 +295,10 @@ const CTAForm = () => {
         >
           Others
         </Chip>
-        . A little brief about my project :
+        . A small message note about my requirement :
         <TextInput
           className="border-gray-400 inline-block border-solid border-b-2 border-t-0 border-r-0 border-l-0 w-full"
-          placeholder="explain your project"
+          placeholder="message"
           classNames={{
             input: 'text-white abeezee text-lg leading-tight input-box',
             error: '-mb-4',
