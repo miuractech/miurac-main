@@ -1,307 +1,277 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import {
-  Box,
-  Button,
-  Chip,
-  Container,
-  FileButton,
-  Select,
-  Text,
-  Textarea,
-  TextInput,
-  Title,
-} from '@mantine/core';
-import { useForm, yupResolver } from '@mantine/form';
+import { Button, Container, Select, Text, Textarea, TextInput, Title } from '@mantine/core'
+import { DatePicker } from '@mantine/dates'
+import { useForm, yupResolver } from '@mantine/form'
 import * as yup from 'yup';
-import { app, db } from '../../config/firebaseConfig';
-import useStorage from 'libs/miurac-files/src/lib/hooks/useStorage';
-import { uuidv4 } from '@firebase/util';
-import { addDoc, collection } from 'firebase/firestore';
-import { showNotification } from '@mantine/notifications';
-import { IconCalendar, IconX } from '@tabler/icons';
-import { DatePicker } from '@mantine/dates';
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-type Tagged<A, T> = A & { __tag?: T };
-// eslint-disable-next-line @typescript-eslint/ban-types
-type Props = {};
+import { IconCirclePlus } from '@tabler/icons'
+import React, { useEffect, useState } from 'react'
 
-// eslint-disable-next-line no-empty-pattern
- function Careers({}: Props) {
-  const { upload } = useStorage({ app, updateFirestore: false });
-  const form = useForm<{
-    phone: Tagged<string, "E164Number"> | undefined;
-    name: string;
-    email: string;
-    profession: 'employee' | 'student' | 'others' | '';
-    fatherName: string;
-    // resume: File | null;
-    interest: string;
-    message: string;
-    maritalStatus: string | null;
-  }>({
-    initialValues: {
-      phone:"",
-      fatherName: '',
-      name: '',
-      email: '',
-      profession: '',
-      // resume: null,
-      interest: '',
-      message: '',
-      maritalStatus: '',
-    },
-    validate: yupResolver(
-      yup.object({
-        name: yup
-          .string()
-          .min(3, 'Enter a valid name')
-          .required('Enter a valid name'),
-        email: yup
-          .string()
-          .email('Enter a valid Email')
-          .required('Enter a valid Email'),
-        // resume: yup.mixed().required('File is required'),
-        interest: yup.string().required('Select atleast one option'),
-        fatherName: yup
-          .string()
-          .min(3, 'Enter a valid name')
-          .required('Select atleast one option'),
-        profession: yup.string().min(2).required('Select atleast one option'),
-        maritalStatus: yup.string().required('Select atleast one option'),
-        message: yup.string(),
-      })
-    ),
-  });
-  const [loading, setLoading] = useState(false);
+const schema =
+    yup.object({
+        name: yup.string().min(3, 'Enter a valid name').required('Name is requried'),
+        email: yup.string().email('Enter a valid Email').required('Email is requried'),
+        fatherName: yup.string().min(3, 'Enter a valid name').required('Father name is requried'),
+        dob: yup.string().required('Date of birth is requried'),
+        gender: yup.string().required('Gender is requried'),
+        education: yup.string().required('Education is requried'),
+        address1: yup.string().min(5, 'Enter a valid address').required('Address is requried'),
+        city: yup.string().min(3, 'Enter a valid City').required('City is requried'),
+        state: yup.string().min(3, 'Enter a valid State').required('State is requried'),
+        country: yup.string().min(3, 'Enter a valid State').required('State is requried'),
+        pincode: yup.string().min(6, 'Enter a valid Pincode').max(6, 'Enter a valid Pincode').required('Pincode is requried').typeError('Enter only digits  '),
+        phone: yup.string().min(8, 'Enter a valid Phone number').max(12, 'Enter a valid Phone number').required('Number is requried').typeError('Enter only digits  '),
+        educationalHistory: yup.array().required('Education is requried'),
+        workLink: yup.string().min(3, 'Enter a valid Worklink').required('Worklink is requried'),
+        aboutYourSelf: yup.string().min(20, 'Enter atleast 20 characters').required('Requried'),
+        whyToHire: yup.string().min(20, 'Enter atleast 20 characters').required('Requried'),
+    })
 
-  return (
-    <div
-      key={'contact'}
-      id={'contact'}
-      className="w-full template-shadow roie h-screen"
-      style={{
-        background:
-          'linear-gradient(90.54deg, #FBFBFD 0.06%, rgba(245, 245, 245, 0.97) 99.12%)',
-      }}
-    >
-      <div className="h-16" />
-      <Container>
-        {/* <div className="w-full rounded-xl max-w-md m-auto bg-white p-5"> */}
-        <Box
-          // sx={{ maxWidth: 400 }}
-          mx="auto"
-          className="rounded-xl bg-white p-4"
+const Career = () => {
+    const [educationInput, setEducationInput] = useState(false)
+    const [employmentInput, setEmploymentInput] = useState(false)
+    const [dob, setDob] = useState<Date|null>(null)
+    const [eduInputs, setEduInputs] = useState({
+        degreeName: '',
+        CGPAormarks:''
+    })
+    const [empInputs, setEmpInputs] = useState({
+        employerName: '',
+        expMonths:0
+    })
+    const [empArray, setEmpArray] = useState<any[]>([])
+    const [eduArray, setEduArray] = useState<any[]>([])
+
+    const form = useForm({
+        initialValues: {
+            name: '',
+            email: '',
+            fatherName: '',
+            dob: '' as unknown as Date,
+            gender: '',
+            education: '',
+            address1: '',
+            address2: '',
+            city: '',
+            state: '',
+            country: '',
+            pincode: '',
+            phone: '',
+            educationalHistory: [] as any[],
+            employmentHistory: [] as any[],
+            workLink: '',
+            aboutYourSelf: '',
+            whyToHire: ''
+        },
+
+        validate: yupResolver(schema)
+    });
+
+    useEffect(() => {
+        form.setFieldValue("educationalHistory", eduArray)
+        form.setFieldValue("employmentHistory", empArray)
+        if (dob) {
+            form.setFieldValue("dob", dob)
+        }
+
+    }, [empArray, eduArray, dob ])
+    
+console.log(form.errors);
+
+    return (
+        <div
+            key={'contact'}
+            id={'contact'}
+            className="w-full template-shadow roie h-screen"
+            style={{
+                background:
+                    'linear-gradient(90.54deg, #FBFBFD 0.06%, rgba(245, 245, 245, 0.97) 99.12%)',
+            }}
         >
-          <Title align="center" className="text-gray-700">
-            Join the Miurac Family
-          </Title>
-          <form
-            onSubmit={form.onSubmit(async (data) => {
-              setLoading(true);
-              try {
-                console.log(data);
-
-                // const { name, email, interest, message } = data;
-                // const url = (await upload({
-                //   //@ts-ignore
-                //   file: resume,
-                //   path: `uploads/${uuidv4()}/file`,
-                //   //@ts-ignore
-                //   fileName: resume.name,
-                // })) as string;
-                //   await addDoc(collection(db, 'career'), {
-                //     name,
-                //     email,
-                //     interest,
-                //     message,
-                //     resume: url,
-                //   });
-                setLoading(false);
-                //   showNotification({
-                //     id: `reg-err-${Math.random()}`,
-                //     autoClose: 5000,
-                //     title: 'Success',
-                //     message: 'Your Application has been successfully submitted.',
-                //     color: 'dark',
-                //     icon: <IconX />,
-                //     loading: false,
-                //   });
-              } catch (error) {
-                setLoading(false);
-                showNotification({
-                  id: `reg-err-${Math.random()}`,
-                  autoClose: 5000,
-                  title: 'Failed',
-                  message: 'Unkonwn error happened! try again!!',
-                  color: 'red',
-                  icon: <IconX />,
-                  loading: false,
-                });
-              }
-            })}
-          >
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-x-3">
-              <TextInput
-                className="my-2"
-                required
-                name="name"
-                classNames={{
-                  input: 'abeezee',
-                }}
-                label="Full Name"
-                placeholder="enter your name"
-                {...form.getInputProps('name')}
-              />
-              <TextInput
-                className="my-2"
-                required
-                name="father name"
-                classNames={{
-                  input: 'abeezee',
-                }}
-                label="Father's Name"
-                placeholder="enter your father name"
-                {...form.getInputProps('fatherName')}
-              />
-
-              <TextInput
-                className="my-2"
-                label="Email"
-                name="email"
-                required
-                classNames={{
-                  input: 'abeezee',
-                }}
-                placeholder="email"
-                {...form.getInputProps('email')}
-              />
-
-              <DatePicker
-                placeholder="DOB"
-                className="my-2"
-                name="date of birth"
-                label="Date of Birth"
-                icon={<IconCalendar size={16} />}
-                withAsterisk
-                {...form.getInputProps('DOB')}
-              />
-              <div className="flex">
-                <PhoneInput
-                  placeholder="Enter phone number"
-                  value={form.values.phone}
-                  onChange={e=>form.setFieldValue("phone",e)}
-                />
-              </div>
-              <TextInput
-                className="my-2"
-                label="Address 1"
-                name="address1"
-                required
-                classNames={{
-                  input: 'abeezee',
-                }}
-                placeholder="House Number, Apartment, etc"
-                {...form.getInputProps('address1')}
-              />
-              <div>
-                <div className="flex items-center justify-start h-16 my-2 pt-3">
-                  <Text className="w-14 pl-2">I am a</Text>
-                  <Chip.Group
-                    className="my-2"
-                    multiple={false}
-                    position="left"
-                    value={form.values.profession}
-                    onChange={(v: any) => form.setFieldValue('profession', v)}
-                  >
-                    <Chip
-                      value={'student'}
-                      classNames={{
-                        input: 'abeezee',
-                      }}
-                    >
-                      Student
-                    </Chip>
-                    <Chip
-                      value={'employee'}
-                      classNames={{
-                        input: 'abeezee',
-                      }}
-                    >
-                      Employee
-                    </Chip>
-                    <Chip
-                      value={'other'}
-                      classNames={{
-                        input: 'abeezee',
-                      }}
-                    >
-                      Others
-                    </Chip>
-                  </Chip.Group>
-                </div>
-                <Text
-                  className="-mt-7 ml-2 w-full abeezee"
-                  size={12}
-                  weight={700}
-                  color={'red'}
-                >
-                  {form.errors['profession']}
-                </Text>
-              </div>
-              <Select
-                label="Marital Status"
-                my={8}
-                data={[
-                  { value: 'married', label: 'Married' },
-                  { value: 'unmarried', label: 'Unmarried' },
-                ]}
-                value={form.values.maritalStatus}
-                onChange={(e) => form.setFieldValue('maritalStatus', e)}
-                //@ts-ignore
-                error={form.errors.maritalStatus}
-              />
-              {/* <TextInput
-              className="my-2"
-              label=""
-              required
-              classNames={{
-                input: 'abeezee',
-              }}
-              placeholder="email"
-              {...form.getInputProps('email')}
-            /> */}
-              <Select
-                label="Your interest"
-                className="my-2"
-                placeholder="Your Interest"
-                data={[
-                  { value: 'dev', label: 'Developement' },
-                  { value: 'design', label: 'Design' },
-                  { value: 'management', label: 'Management' },
-                  { value: 'other', label: 'Other' },
-                ]}
-                value={form.values.interest}
-                onChange={(v) => {
-                  if (v) form.setFieldValue('interest', v);
-                }}
-                error={form.errors['interest']}
-              />
-              <Textarea
-                className="my-2"
-                label="Message"
-                placeholder="Message"
-                {...form.getInputProps('message')}
-              />
-            </div>
-            <Button loading={loading} className="my-4" fullWidth type="submit">
-              Submit
-            </Button>
-          </form>
-        </Box>
-        {/* </div> */}
-      </Container>
-    </div>
-  );
+            <div className="h-16" />
+            <Container className='bg-white shadow-sm rounded-lg p-5 max-w-3xl'>
+                <Title my={10} align='center' order={2}>Join the Miurac Family</Title>
+                <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                    <div className='space-y-3'>
+                        <TextInput
+                            label='Full Name'
+                            withAsterisk
+                            placeholder='Enter your name'
+                            name='name'
+                            {...form.getInputProps('name')}
+                        />
+                        <TextInput
+                            label='Email'
+                            type='email'
+                            withAsterisk
+                            placeholder='Enter your email id'
+                            {...form.getInputProps('email')}
+                        />
+                        <TextInput
+                            label='Fathers Name'
+                            withAsterisk
+                            placeholder='Enter your Fathers Name'
+                            {...form.getInputProps('fatherName')}
+                        />
+                        <DatePicker
+                            label='Date of Birth'
+                            withAsterisk
+                            placeholder='Enter your Date of birth'
+                            {...form.getInputProps('dob')}
+                            onChange={(e) => e && setDob(e)}
+                        />
+                        <Select
+                            label="Gender"
+                            placeholder="Select your gender"
+                            withAsterisk
+                            {...form.getInputProps('gender')}
+                            data={[
+                                { value: 'male', label: 'Male' },
+                                { value: 'female', label: 'Female' },
+                                { value: 'other', label: 'Prefer not to answer' },
+                            ]}
+                        />
+                        <Select
+                            label="Education"
+                            placeholder="Select your Education"
+                            withAsterisk
+                            {...form.getInputProps('education')}
+                            data={[
+                                { value: 'masters', label: 'Masters' },
+                                { value: "bachelor's", label: "Bachelor's " },
+                                { value: "higher secondary", lable: "Higher secondary" },
+                                { value: 'other', label: 'Other' },
+                            ]}
+                        />
+                        <div className='space-y-3'>
+                            <TextInput
+                                withAsterisk
+                                label="Address 1"
+                                placeholder='Address 1'
+                                {...form.getInputProps('address1')}
+                            />
+                            <TextInput
+                                withAsterisk
+                                label="Address 2"
+                                placeholder='Address 2  (Optional)'
+                                {...form.getInputProps('address2')}
+                            />
+                            <div className='grid grid-cols-2 gap-3'>
+                                <TextInput
+                                    withAsterisk
+                                    label="City"
+                                    placeholder='Enter your City'
+                                    {...form.getInputProps('city')}
+                                />
+                                <TextInput
+                                    withAsterisk
+                                    label="State"
+                                    placeholder='Enter your State'
+                                    {...form.getInputProps('state')}
+                                />
+                                <TextInput
+                                    withAsterisk
+                                    label="Country"
+                                    placeholder='Enter your Country'
+                                    {...form.getInputProps('country')}
+                                />
+                                <TextInput
+                                    withAsterisk
+                                    label="Pincode"
+                                    placeholder='Enter your Pincode'
+                                    type="number"
+                                    {...form.getInputProps('pincode')}
+                                />
+                                <TextInput
+                                    withAsterisk
+                                    label="Phone Number"
+                                    placeholder='Enter your Phone Number'
+                                    type="number"
+                                    {...form.getInputProps('phone')}
+                                />
+                            </div>
+                        </div>
+                        <div className='space-y-5 my-5'>
+                            <div className='flex gap-3'>
+                                <Text size={14}>Educational History <span className='text-red-600'>*</span></Text>
+                                <IconCirclePlus className='cursor-pointer' onClick={() => setEducationInput(!educationInput)} />
+                            </div>
+                            <div className='md:grid grid-cols-3 gap-3'>
+                                {eduArray.map(a => (
+                                    <div className='p-3 border-gray-300 border-solid rounded-md grid grid-cols-2'>
+                                        <span>Degree</span>
+                                        <Text>: {a.degreeName}</Text>
+                                        <span>CGPA/Marks</span>
+                                        <Text>: {a.CGPAormarks}</Text>
+                                    </div>
+                                ))}
+                            </div>
+                            {educationInput &&
+                                <div className='space-y-3 lg:w-1/2'>
+                                    <TextInput
+                                        onChange={(e) => setEduInputs({ ...eduInputs, degreeName: e.target.value })}
+                                        placeholder='Degree name'
+                                    />
+                                    <TextInput
+                                        type='number'
+                                        placeholder='CGPA / Marks '
+                                        onChange={(e) => setEduInputs({ ...eduInputs, CGPAormarks: e.target.value })}
+                                    />
+                                    <Button onClick={() => { setEduArray([...eduArray, eduInputs]); setEducationInput(false) }}>Save</Button>
+                                </div>}
+                            <div className='flex gap-3'>
+                                <Text size={14}>Employment History <span className='text-red-600'>*</span></Text>
+                                <IconCirclePlus className='cursor-pointer' onClick={() => setEmploymentInput(!employmentInput)} />
+                            </div>
+                            <div className='md:grid grid-cols-3 gap-3'> 
+                                {empArray.map(a => (
+                                    <div className='p-3 border-gray-300 border-solid rounded-md grid grid-cols-2'>
+                                        <span>Employer</span>
+                                        <Text>: {a.employerName}</Text>
+                                        <span>Experience</span>
+                                        <Text>: {a.expMonths}</Text>
+                                    </div>
+                                ))}
+                            </div>
+                            {employmentInput &&
+                                <div className='space-y-3 lg:w-1/2'>
+                                    <TextInput
+                                        placeholder='Employer name'
+                                        onChange={(e) => setEmpInputs({ ...empInputs, employerName: e.target.value })}
+                                    />
+                                    <TextInput
+                                        placeholder='Experience in months'
+                                        onChange={(e) => setEmpInputs({ ...empInputs, expMonths: Number(e.target.value) })}
+                                    />
+                                    <Button onClick={() => { setEmpArray([...empArray, empInputs]);  setEmploymentInput(false)}}>Save</Button>
+                                </div>}
+                        </div>
+                        <TextInput
+                            withAsterisk
+                            label='Work Links'
+                            description='git, behance or any other'
+                            placeholder='Enter your work links here'
+                            {...form.getInputProps('workLink')}
+                        />
+                        <Textarea
+                            label='About you'
+                            withAsterisk
+                            placeholder='About Your self'
+                            {...form.getInputProps('aboutYourSelf')}
+                        />
+                        <Textarea
+                            label='Why should we hire you'
+                            withAsterisk
+                            placeholder='Why should we hire you'
+                            {...form.getInputProps('whyToHire')}
+                        />
+                        <div className='flex gap-5 justify-center'>
+                            <Button variant='outline'>Reset</Button>
+                            <Button type='submit'>Save</Button>
+                        </div>
+                    </div>
+                </form>
+            </Container>
+        </div>
+    )
 }
+
+export default Career
