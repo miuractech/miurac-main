@@ -5,7 +5,7 @@ import Topbar from '../components/topbar';
 const Home = React.lazy(() => import('../pages/home/home'));
 const StartUp = React.lazy(() => import('../pages/startup/home'));
 const Contact = React.lazy(() => import('../pages/contact/contact'));
-const Careers = React.lazy(() => import('../pages/careers/careers'));
+const Careers = React.lazy(() => import('../pages/careers/Career'));
 const Business = React.lazy(() => import('../pages/business/home'));
 const About = React.lazy(() => import('../pages/about-us'));
 const WhyMiurac = React.lazy(() => import('../pages/why-miurac'));

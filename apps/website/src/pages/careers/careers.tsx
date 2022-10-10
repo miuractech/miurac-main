@@ -28,7 +28,7 @@ type Tagged<A, T> = A & { __tag?: T };
 type Props = {};
 
 // eslint-disable-next-line no-empty-pattern
-export default function Careers({}: Props) {
+ function Careers({}: Props) {
   const { upload } = useStorage({ app, updateFirestore: false });
   const form = useForm<{
     phone: Tagged<string, "E164Number"> | undefined;
