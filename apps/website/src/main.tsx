@@ -36,6 +36,11 @@ root.render(
           fontFamily: 'Roie',
           fontWeight: 500,
         },
+        components:{
+          Button:{
+            classNames:{root:'font-light'},
+          }
+        }
       }}
     >
       <Provider store={store}>

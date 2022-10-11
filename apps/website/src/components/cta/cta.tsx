@@ -295,7 +295,7 @@ const CTAForm = () => {
         >
           Others
         </Chip>
-        . A small message note about my requirement :
+        . A message about my requirement :
         <TextInput
           className="border-gray-400 inline-block border-solid border-b-2 border-t-0 border-r-0 border-l-0 w-full"
           placeholder="message"

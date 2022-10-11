@@ -10,6 +10,8 @@ import { NavBar } from '../component/navbar/Topbar';
 import { auth, functions } from '../config/firebaseConfig';
 import AdminAuth from '../MIDL/AdminAuth';
 import { setUser } from '../MIDL/AdminAuth/redux-slice';
+import Applicant from '../MIDL/applicants';
+import ApplicantComponent from '../MIDL/applicants/applicant';
 import Employee from '../MIDL/EmployeeManagement';
 import Enquiry from '../MIDL/Enquiry';
 import EnquiryComponent from '../MIDL/Enquiry/enquiry';
@@ -69,6 +71,9 @@ export function App() {
         <Routes>
           <Route path="/" element={<Enquiry />}>
             <Route index element={<EnquiryComponent />} />
+          </Route>
+          <Route path="/application" element={<Applicant />}>
+            <Route index element={<ApplicantComponent />} />
           </Route>
           <Route path="/employees" >
             <Route index element={<Employee />} />

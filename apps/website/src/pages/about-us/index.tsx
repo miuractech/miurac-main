@@ -32,7 +32,11 @@ export default function About({}: Props) {
             start: 'top top',
             pin: true,
             pinSpacing: false,
-            snap: 1,
+            snap: {
+              snapTo: 1,
+              duration: 0.8,
+              inertia:false
+            },
           },
         });
       }
@@ -49,7 +53,7 @@ export default function About({}: Props) {
           id={'about-us-home'}
           text={'What brings change in this world?'}
           captionText={
-            'We strongly believe that passionate people with unimaginable amounts of commitment bring changes in this world! The guy who sacrifices his own comfort and needs to follow his dreams.'
+            'We strongly believe that passionate people with incredible amounts of commitment bring changes in this world! The guy who sacrifices his own comfort and needs to follow his dreams.'
           }
           heroImage={ChangeImage}
           centerAlignText={false}
@@ -69,7 +73,7 @@ export default function About({}: Props) {
         >
           <div className="h-16" />
           <div className="w-full max-w-xl md:px-20 m-auto bg-white text-center">
-            <Title order={4} className="py-4 md:py-8">
+            <Title order={4} className="py-4">
               Our Story
             </Title>
             <Text
@@ -97,7 +101,7 @@ export default function About({}: Props) {
                     &nbsp;
                   </ThemeIcon>
                 }
-                className="abeezee text-left p-4 text-xs md:text-sm"
+                className="abeezee text-left p-3 text-xs md:text-sm"
               >
                 <List.Item>
                   Most Indian techies prefers job safety than taking risk
@@ -112,16 +116,16 @@ export default function About({}: Props) {
               </List>
               <br />
               <Text className="abeezee text-justify px-4 text-xs md:text-sm">
-                He was decided to dedicate his life in making the tech
-                affordable to everyone. To achieve their vision and make their
+                He decided to dedicate his life in making the tech
+                affordable to everyone, to achieve their vision and make their
                 dream a true reality.
               </Text>
               <br />
               <Text className="abeezee text-justify px-4 text-xs md:text-sm">
                 India has a lot of passionate people who are dedicated to make
                 this country a better one but Tech is unreachable to common man.
-                To tackle this problem in our society and make tech affordable
-                and even playground for everyone,
+                To tackle this problem in our society, to make tech affordable
+                and even playground for everyone
               </Text>
               <Text align="left" className="p-4">
                 “ Miurac was born ”

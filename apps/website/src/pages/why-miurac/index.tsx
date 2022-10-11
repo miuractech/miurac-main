@@ -24,7 +24,11 @@ export default function Home({}: Props) {
             start: 'top top',
             pin: true,
             pinSpacing: false,
-            snap: 1,
+            snap: {
+              snapTo: 1,
+              duration: 0.8,
+              inertia:false
+            },
           },
         });
       }

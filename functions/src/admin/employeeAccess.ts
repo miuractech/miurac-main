@@ -20,6 +20,7 @@ const grantRole = async (email: string, access: string[]): Promise<void> => {
   //   newAccess[acc] = true;
   // }
   // console.log("newAccess", newAccess);
+  // "["Books","Tutor"]";
   return auth.setCustomUserClaims(user.uid, {access: JSON.stringify(access)});
 };
 

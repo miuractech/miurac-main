@@ -3,6 +3,8 @@ import TemplatePage from '../../components/miurac-page/templatePage';
 import { pagesInfo } from './pagesInfo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ScrollToTop from '../../components/utils/ScrollToTop';
+import { useWindowScroll } from '@mantine/hooks';
 gsap.registerPlugin(ScrollTrigger);
 // import { useCounter } from '@mantine/hooks';
 // import ReactScrollWheelHandler from 'react-scroll-wheel-handler';
@@ -16,6 +18,7 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 export default function Home({}: Props) {
   const ref = useRef<HTMLDivElement>();
+  const [scroll, scrollTo] = useWindowScroll();
   useEffect(() => {
     const element = ref.current;
     if (element) {
@@ -26,7 +29,11 @@ export default function Home({}: Props) {
             start: 'top top',
             pin: true,
             pinSpacing: false,
-            snap: 1,
+            snap: {
+              snapTo: 1,
+              duration: 0.8,
+              inertia:false
+            },
           },
         });
       }
@@ -38,7 +45,7 @@ export default function Home({}: Props) {
       //@ts-ignore
       ref={ref} className='scroll'
     >
-      {pagesInfo.map(({ id, bgColor, text, img, captionText }) => (
+      {pagesInfo.map(({ id, bgColor, text, img, captionText },index) => (
         <React.Fragment key={id}>
           <TemplatePage
             bgColor={bgColor}
@@ -47,9 +54,11 @@ export default function Home({}: Props) {
             heroImage={img}
             centerAlignText
             captionText={captionText}
+            showScrollAnimation={index===0}
           />
         </React.Fragment>
       ))}
+      <ScrollToTop visible={scroll.y > 20} onClick={() => scrollTo({ y: 0 })} />
     </div>
   );
 }

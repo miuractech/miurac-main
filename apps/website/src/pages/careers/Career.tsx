@@ -86,10 +86,11 @@ console.log(form.errors);
             <Container className='bg-white shadow-sm rounded-lg p-5'>
                 <Title my={10} align='center' order={2}>Join the Miurac Family</Title>
                 <form onSubmit={form.onSubmit((values) => console.log(values))}>
-                    <div className='space-y-3'>
+                    <div className='grid md:grid-cols-2 grid-cols-1 gap-3'>
                         <TextInput
                             label='Full Name'
                             withAsterisk
+                            classNames={{input:'abeezee'}}
                             placeholder='Enter your name'
                             name='name'
                             {...form.getInputProps('name')}
@@ -98,18 +99,21 @@ console.log(form.errors);
                             label='Email'
                             type='email'
                             withAsterisk
+                            classNames={{input:'abeezee'}}
                             placeholder='Enter your email id'
                             {...form.getInputProps('email')}
                         />
                         <TextInput
                             label='Fathers Name'
                             withAsterisk
+                            classNames={{input:'abeezee'}}
                             placeholder='Enter your Fathers Name'
                             {...form.getInputProps('fatherName')}
                         />
                         <DatePicker
                             label='Date of Birth'
                             withAsterisk
+                            classNames={{input:'abeezee'}}
                             placeholder='Enter your Date of birth'
                             {...form.getInputProps('dob')}
                             onChange={(e) => e && setDob(e)}
@@ -124,6 +128,8 @@ console.log(form.errors);
                                 { value: 'female', label: 'Female' },
                                 { value: 'other', label: 'Prefer not to answer' },
                             ]}
+                            classNames={{input:'abeezee',dropdown:"abeezee",item:"abeezee",}}
+                            className="abeezee"
                         />
                         <Select
                             label="Education"
@@ -140,12 +146,14 @@ console.log(form.errors);
                         <div className=''>
                             <TextInput
                                 withAsterisk
+                                classNames={{input:'abeezee'}}
                                 label="Address 1"
                                 placeholder='Address 1'
                                 {...form.getInputProps('address1')}
                             />
                             <TextInput
                                 withAsterisk
+                                classNames={{input:'abeezee'}}
                                 label="Address 2"
                                 placeholder='Address 2  (Optional)'
                                 {...form.getInputProps('address2')}
@@ -153,6 +161,7 @@ console.log(form.errors);
                             <div className='grid grid-cols-2 gap-x-3'>
                                 <TextInput
                                     withAsterisk
+                                    classNames={{input:'abeezee'}}
                                     label="City"
                                     placeholder='Enter your City'
                                     {...form.getInputProps('city')}
@@ -160,18 +169,21 @@ console.log(form.errors);
                                 <TextInput
                                     withAsterisk
                                     label="State"
+                                    classNames={{input:'abeezee'}}
                                     placeholder='Enter your State'
                                     {...form.getInputProps('state')}
                                 />
                                 <TextInput
                                     withAsterisk
                                     label="Country"
+                                    classNames={{input:'abeezee'}}
                                     placeholder='Enter your Country'
                                     {...form.getInputProps('country')}
                                 />
                                 <TextInput
                                     withAsterisk
                                     label="Pincode"
+                                    classNames={{input:'abeezee'}}
                                     placeholder='Enter your Pincode'
                                     type="number"
                                     {...form.getInputProps('pincode')}
@@ -179,6 +191,7 @@ console.log(form.errors);
                                 <TextInput
                                     withAsterisk
                                     label="Phone Number"
+                                    classNames={{input:'abeezee'}}
                                     placeholder='Enter your Phone Number'
                                     type="number"
                                     {...form.getInputProps('phone')}
@@ -203,11 +216,13 @@ console.log(form.errors);
                             {educationInput &&
                                 <div className='space-y-3 lg:w-1/2'>
                                     <TextInput
+                                    classNames={{input:'abeezee'}}
                                         onChange={(e) => setEduInputs({ ...eduInputs, degreeName: e.target.value })}
                                         placeholder='Degree name'
                                     />
                                     <TextInput
                                         type='number'
+                                        classNames={{input:'abeezee'}}
                                         placeholder='CGPA / Marks '
                                         onChange={(e) => setEduInputs({ ...eduInputs, CGPAormarks: e.target.value })}
                                     />
@@ -230,10 +245,12 @@ console.log(form.errors);
                             {employmentInput &&
                                 <div className='space-y-3 lg:w-1/2'>
                                     <TextInput
+                                    classNames={{input:'abeezee'}}
                                         placeholder='Employer name'
                                         onChange={(e) => setEmpInputs({ ...empInputs, employerName: e.target.value })}
                                     />
                                     <TextInput
+                                    classNames={{input:'abeezee'}}
                                         placeholder='Experience in months'
                                         onChange={(e) => setEmpInputs({ ...empInputs, expMonths: Number(e.target.value) })}
                                     />
@@ -242,6 +259,7 @@ console.log(form.errors);
                         </div>
                         <TextInput
                             withAsterisk
+                            classNames={{input:'abeezee'}}
                             label='Work Links'
                             description='git, behance or any other'
                             placeholder='Enter your work links here'
@@ -250,12 +268,14 @@ console.log(form.errors);
                         <Textarea
                             label='About you'
                             withAsterisk
+                            classNames={{input:'abeezee'}}
                             placeholder='About Your self'
                             {...form.getInputProps('aboutYourSelf')}
                         />
                         <Textarea
                             label='Why should we hire you'
                             withAsterisk
+                            classNames={{input:'abeezee'}}
                             placeholder='Why should we hire you'
                             {...form.getInputProps('whyToHire')}
                         />
