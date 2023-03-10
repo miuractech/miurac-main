@@ -13,7 +13,7 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { useForm, yupResolver } from '@mantine/form';
+import { useForm, UseFormReturnType, yupResolver } from '@mantine/form';
 import * as yup from 'yup';
 import { db } from '../../config/firebaseConfig';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
@@ -25,7 +25,7 @@ import { applicantType } from '@miurac/resources';
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
 
-type applicantTypeFull = applicantType & {DOB: string;}
+type applicantTypeFull = applicantType & { DOB: string };
 // eslint-disable-next-line no-empty-pattern
 export default function Careers({}: Props) {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ export default function Careers({}: Props) {
       maritalStatus: '',
       question1: '',
       question2: '',
-      message:""
+      message: '',
     },
     validate: yupResolver(
       yup.object({
@@ -56,29 +56,32 @@ export default function Careers({}: Props) {
           .string()
           .min(3, 'Enter a valid name')
           .required('Enter a valid name'),
-        education: yup.array(
-          yup.object().shape({
-            from: yup
-              .number()
-              .typeError('Year must be a number')
-              .min(1950, 'You want me to believe this?')
-              .max(new Date().getFullYear(), 'enter a valid year')
-              .required('year is required'),
-            to: yup
-              .number()
-              .typeError('Year must be a number')
-              .min(1950, 'You want me to believe this?')
-              .max(new Date().getFullYear() + 10, 'enter a valid year')
-              .required('year is required'),
-            title: yup.string().required('college/school is required'),
-            cgpa: yup
-              .number()
-              .typeError('Score must be a number')
-              .min(0, 'you scored negative mark?')
-              .max(100, 'Were you using Apsara pencil?')
-              .required('Please provide your Mark in %.'),
-          })
-        ).min(1,"Please provide your schoolings info").required("Please provide your schoolings info"),
+        education: yup
+          .array(
+            yup.object().shape({
+              from: yup
+                .number()
+                .typeError('Year must be a number')
+                .min(1950, 'You want me to believe this?')
+                .max(new Date().getFullYear(), 'enter a valid year')
+                .required('year is required'),
+              to: yup
+                .number()
+                .typeError('Year must be a number')
+                .min(1950, 'You want me to believe this?')
+                .max(new Date().getFullYear() + 10, 'enter a valid year')
+                .required('year is required'),
+              title: yup.string().required('college/school is required'),
+              cgpa: yup
+                .number()
+                .typeError('Score must be a number')
+                .min(0, 'you scored negative mark?')
+                .max(100, 'Were you using Apsara pencil?')
+                .required('Please provide your Mark in %.'),
+            })
+          )
+          .min(1, 'Please provide your schoolings info')
+          .required('Please provide your schoolings info'),
         email: yup
           .string()
           .email('Enter a valid Email')
@@ -101,8 +104,6 @@ export default function Careers({}: Props) {
 
   return (
     <div
-      key={'contact'}
-      id={'contact'}
       className="w-full template-shadow roie"
       style={{
         background:
@@ -141,9 +142,9 @@ export default function Careers({}: Props) {
                   icon: <IconX />,
                   loading: false,
                 });
-                form.reset()
+                form.reset();
                 setTimeout(() => {
-                  navigate("/")
+                  navigate('/');
                 }, 5000);
               } catch (error) {
                 setLoading(false);
@@ -183,17 +184,9 @@ export default function Careers({}: Props) {
                 {...form.getInputProps('fatherName')}
               />
 
-              <TextInput
-                className="my-2"
-                label="Email"
-                name="email"
-                required
-                classNames={{
-                  input: 'abeezee',
-                }}
-                placeholder="email"
-                {...form.getInputProps('email')}
-              />
+              {/* }, [empArray, eduArray, dob ])
+    
+console.log(form.errors); */}
 
               <DatePicker
                 placeholder="DOB"
@@ -379,84 +372,7 @@ export default function Careers({}: Props) {
                   Educational History <span className="text-red-600">*</span>
                 </Text>
               </div>
-              <div className="w-full overflow-y-auto">
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>From</th>
-                      <th>To</th>
-                      <th>College/school</th>
-                      <th>CGPA%</th>
-                      <th>clear</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {form.values.education.map((element, index) => (
-                      <tr key={index}>
-                        <td>
-                          <TextInput
-                            placeholder="from year"
-                            {...form.getInputProps(`education.${index}.from`)}
-                          />
-                        </td>
-                        <td>
-                          <TextInput
-                            {...form.getInputProps(`education.${index}.to`)}
-                            placeholder="to year"
-                          />
-                        </td>
-                        <td>
-                          <TextInput
-                            placeholder="College/school"
-                            {...form.getInputProps(`education.${index}.title`)}
-                          />
-                        </td>
-                        <td>
-                          <TextInput
-                            placeholder="% mark"
-                            {...form.getInputProps(`education.${index}.cgpa`)}
-                          />
-                        </td>
-                        <td>
-                          <ActionIcon
-                            variant="subtle"
-                            size="sm"
-                            onClick={() =>
-                              form.removeListItem(`education`, index)
-                            }
-                          >
-                            <IconX />
-                          </ActionIcon>
-                        </td>
-                      </tr>
-                    ))}
-                    <tr>
-                      <Button
-                        className="my-1"
-                        variant="filled"
-                        size="xs"
-                        onClick={() =>
-                          form.setFieldValue(
-                            `education.${form.values.education.length}`,
-                            { from: '', to: '', title: '', cgpa: '' }
-                          )
-                        }
-                        leftIcon={<IconPlus />}
-                      >
-                        Add Row
-                      </Button>
-                    </tr>
-                  </tbody>
-                </Table>
-                <Text
-                  className="abeezee"
-                  size={12}
-                  weight={700}
-                  color={'red'}
-                >
-                  {form.errors['education']}
-                </Text>
-              </div>
+              <TableInputComponent form={form} name={'education'} />
             </div>
 
             <Textarea
@@ -503,3 +419,89 @@ export default function Careers({}: Props) {
     </div>
   );
 }
+
+// export default Career
+
+const TableInputComponent = ({
+  form,
+  name,
+}: {
+  form: UseFormReturnType<applicantTypeFull>;
+  name: string;
+}) => {
+  return (
+    <div className="w-full overflow-y-auto">
+      <Table>
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>College/school</th>
+            <th>CGPA%</th>
+            <th>clear</th>
+          </tr>
+        </thead>
+        <tbody>
+          {form.values.education.map((element, index) => (
+            <tr key={index}>
+              <td>
+                <TextInput
+                  placeholder="from year"
+                  {...form.getInputProps(`${name}.${index}.from`)}
+                />
+              </td>
+              <td>
+                <TextInput
+                  {...form.getInputProps(`${name}.${index}.to`)}
+                  placeholder="to year"
+                />
+              </td>
+              <td>
+                <TextInput
+                  placeholder="College/school"
+                  {...form.getInputProps(`${name}.${index}.title`)}
+                />
+              </td>
+              <td>
+                <TextInput
+                  placeholder="% mark"
+                  {...form.getInputProps(`${name}.${index}.cgpa`)}
+                />
+              </td>
+              <td>
+                <ActionIcon
+                  variant="subtle"
+                  size="sm"
+                  onClick={() => form.removeListItem(`${name}`, index)}
+                >
+                  <IconX />
+                </ActionIcon>
+              </td>
+            </tr>
+          ))}
+          <tr>
+            <Button
+              className="my-1"
+              variant="filled"
+              size="xs"
+              onClick={() =>
+                form.setFieldValue(`${name}.${form.values.education.length}`, {
+                  from: '',
+                  to: '',
+                  title: '',
+                  cgpa: '',
+                })
+              }
+              leftIcon={<IconPlus />}
+            >
+              Add Row
+            </Button>
+          </tr>
+        </tbody>
+      </Table>
+      <Text className="abeezee" size={12} weight={700} color={'red'}>
+        {form.errors[name]}
+      </Text>
+    </div>
+  );
+};

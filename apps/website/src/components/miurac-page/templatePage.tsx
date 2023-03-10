@@ -40,7 +40,7 @@ export default function TemplatePage({
       className="w-full template-shadow scroll"
       style={{ background: bgColor, height: '100vh' }}
     >
-      <div className="h-16" />
+      <div className="h-20" />
       <div className="flex flex-col-reverse lg:flex-row" style={{height:"calc(100vh - 64px)"}}>
         <div
           className={`flex flex-col gap-10 w-full h-3/5 lg:w-full lg:h-5/6 justify-center lg:justify-start pt-6 ${

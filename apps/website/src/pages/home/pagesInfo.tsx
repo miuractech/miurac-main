@@ -36,7 +36,7 @@ export const pagesInfo: pageInfo[] = [
   {
     id: 'google-sheet',
     bgColor: '#DDEBFF',
-    text: "Don't spend time scrolling Google sheets?",
+    text: "Don't waste time scrolling Google sheets?",
     img: GoogleSheetImg,
     centerAlignText: false,
     captionText: (

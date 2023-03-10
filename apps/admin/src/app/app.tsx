@@ -78,6 +78,9 @@ export function App() {
           <Route path="/employees" >
             <Route index element={<Employee />} />
           </Route>
+          <Route path="/projects" >
+            <Route index element={<Employee />} />
+          </Route>
         </Routes>
       </NavBar>
     </div>

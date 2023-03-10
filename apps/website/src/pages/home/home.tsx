@@ -21,9 +21,10 @@ export default function Home({}: Props) {
   const [scroll, scrollTo] = useWindowScroll();
   useEffect(() => {
     const element = ref.current;
+    const tls: gsap.core.Tween[] = []
     if (element) {
       for (const p of pagesInfo) {
-        gsap.to(element.querySelector(`#${p.id}`), {
+        const ts = gsap.to(element.querySelector(`#${p.id}`), {
           scrollTrigger: {
             trigger: element.querySelector(`#${p.id}`),
             start: 'top top',
@@ -36,7 +37,11 @@ export default function Home({}: Props) {
             },
           },
         });
+        tls.push(ts)
       }
+    }
+    return () =>{
+      tls.forEach(t=>t.progress(0).kill())
     }
   }, []);
   return (
@@ -44,7 +49,8 @@ export default function Home({}: Props) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       ref={ref} className='scroll'
-    >
+      >
+      
       {pagesInfo.map(({ id, bgColor, text, img, captionText },index) => (
         <React.Fragment key={id}>
           <TemplatePage
@@ -55,7 +61,7 @@ export default function Home({}: Props) {
             centerAlignText
             captionText={captionText}
             showScrollAnimation={index===0}
-          />
+            />
         </React.Fragment>
       ))}
       <ScrollToTop visible={scroll.y > 20} onClick={() => scrollTo({ y: 0 })} />

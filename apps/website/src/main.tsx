@@ -1,6 +1,5 @@
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
-import { AnimateSharedLayout } from 'framer-motion';
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -45,9 +44,7 @@ root.render(
     >
       <Provider store={store}>
         <NotificationsProvider>
-          <AnimateSharedLayout>
             <App />
-          </AnimateSharedLayout>
         </NotificationsProvider>
       </Provider>
     </MantineProvider>

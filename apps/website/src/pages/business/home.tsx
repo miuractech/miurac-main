@@ -12,9 +12,10 @@ export default function Home({}: Props) {
   const ref = useRef<HTMLDivElement>();
   useEffect(() => {
     const element = ref.current;
+    const tls: gsap.core.Tween[] = []
     if (element) {
       for (const p of pagesInfo) {
-        gsap.to(element.querySelector(`#${p.id}`), {
+        const ts = gsap.to(element.querySelector(`#${p.id}`), {
           scrollTrigger: {
             trigger: element.querySelector(`#${p.id}`),
             start: 'top top',
@@ -27,8 +28,12 @@ export default function Home({}: Props) {
             },
           },
         });
+        tls.push(ts)
       }
     }
+    return () =>{
+      tls.forEach(t=>t.progress(0).kill())
+    } 
   }, []);
 
   return (

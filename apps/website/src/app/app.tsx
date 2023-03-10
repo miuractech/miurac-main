@@ -3,6 +3,7 @@ import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Topbar from '../components/topbar';
 const Home = React.lazy(() => import('../pages/home/home'));
+const Auth = React.lazy(() => import('../pages/auth'));
 const StartUp = React.lazy(() => import('../pages/startup/home'));
 const Contact = React.lazy(() => import('../pages/contact/contact'));
 const Careers = React.lazy(() => import('../pages/careers/careers'));
@@ -13,8 +14,7 @@ const Investor = React.lazy(() => import('../pages/investor/home'));
 
 export function App() {
   return (
-    <div >
-      <Topbar />
+    <div>
       <Suspense
         fallback={
           <div className="w-screen h-screen flex justify-center items-center">
@@ -22,13 +22,21 @@ export function App() {
           </div>
         }
       >
+        <Topbar />
         <Routes>
           <Route
             path={'/'}
-
             element={
-              <div >
+              <div>
                 <Home />
+              </div>
+            }
+          />
+          <Route
+            path={'/login'}
+            element={
+              <div>
+                <Auth />
               </div>
             }
           />
@@ -72,14 +80,7 @@ export function App() {
               </div>
             }
           />
-          <Route
-            path={'/career'}
-            element={
-              <div>
-                <Careers />
-              </div>
-            }
-          />
+          <Route path={'/career'} element={<Careers />} />
           <Route
             path={'/contact'}
             element={
