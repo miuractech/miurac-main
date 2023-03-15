@@ -1,7 +1,9 @@
 import { Loader } from '@mantine/core';
 import React, { Suspense } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import Topbar from '../components/topbar';
+import CaseStudy from '../pages/case-study';
+import EdufeatCaseStudy from '../pages/case-study/edufeat';
 const Home = React.lazy(() => import('../pages/home/home'));
 const Auth = React.lazy(() => import('../pages/auth'));
 const StartUp = React.lazy(() => import('../pages/startup/home'));
@@ -22,16 +24,17 @@ export function App() {
           </div>
         }
       >
-        <Topbar />
+        
         <Routes>
+          <Route path={'/'} element={<><Topbar bg='transparent' /><Outlet /></>}>
           <Route
-            path={'/'}
-            element={
-              <div>
-                <Home />
-              </div>
-            }
-          />
+           index
+           element={
+             <div>
+               <Home />
+             </div>
+           }
+         />
           <Route
             path={'/login'}
             element={
@@ -80,6 +83,27 @@ export function App() {
               </div>
             }
           />
+          </Route>
+          <Route path={'/case-study'} element={<><Topbar bg='white' /><Outlet /></>}>
+          <Route
+           index
+            element={
+              <div>
+                <CaseStudy />
+              </div>
+            }
+          />
+          <Route
+            path={'edufeat'}
+            element={
+              <div>
+                <EdufeatCaseStudy />
+              </div>
+            }
+          />
+          </Route>
+          
+           
           <Route path={'/career'} element={<Careers />} />
           <Route
             path={'/contact'}

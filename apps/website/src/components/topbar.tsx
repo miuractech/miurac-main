@@ -20,11 +20,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { CTA } from './cta/cta';
 import TopSmallBar from './topSmallBar';
 // import Logo from "@miurac/resources"
-// type Props = {
-//   children: JSX.Element;
-// };
+type Props = {
+  bg: "transparent" | string;
+};
 
-export default function Topbar() {
+export default function Topbar({bg}:Props) {
   const [menuOpen, setMenuOpen] = useState(false);
   const mediaMatch = useMediaQuery('(min-width: 700px)');
 
@@ -32,15 +32,12 @@ export default function Topbar() {
   return (
     <Header
         fixed
-        className="bg-transparent"
-        height={80}
-        // p="xs"
-        // px="xl"
+        style={{background:bg}}
+        height={60}
       >
-        <TopSmallBar />
-      <div className="flex justify-between a-p px-2 py-1">
+      <div className="flex justify-between a-p px-2 py-2">
         <Link to="/">
-          <div className="flex items-center cursor-pointer h-full">
+          <div className="flex items-center cursor-pointer h-full ">
             <Logo
               height={mediaMatch ? 40 : 30}
               imgProps={{ className: 'md:mr-2 mr-0 h-4 md:h-10' }}
@@ -129,7 +126,7 @@ export default function Topbar() {
               <div className="flex flex-wrap w-full md:w-3/4 m-auto">
                 <div className="md:w-1/2 w-full md:-mt-1">
                   {navItems
-                    .slice(0, 4)
+                    .slice(0, navItems.length/2)
                     .map(({ text, link, onclick }, index) => (
                       <NavItemComponent
                         index={index}
@@ -142,10 +139,10 @@ export default function Topbar() {
                 </div>
                 <div className="md:w-1/2 w-full">
                   {navItems
-                    .slice(4, 8)
+                    .slice(navItems.length/2, navItems.length)
                     .map(({ text, link, onclick }, index) => (
                       <NavItemComponent
-                        index={index + 4}
+                        index={index + navItems.length/2}
                         text={text}
                         link={link}
                         onclick={onclick}
@@ -179,8 +176,10 @@ const navItems = [
   { text: 'Business', onclick: () => void 0, link: '/business' },
   { text: 'Investor', onclick: () => void 0, link: '/investor' },
   { text: 'About', onclick: () => void 0, link: '/about' },
+  { text: 'Case study', onclick: () => void 0, link: '/case-study' },
   { text: 'Careers', onclick: () => void 0, link: '/career' },
   { text: 'Contact us', onclick: () => void 0, link: '/contact' },
+  { text: 'Login', onclick: () => void 0, link: '/Login' },
 ];
 
 export const socialItems = [
@@ -211,7 +210,7 @@ const NavItemComponent = ({
       className="md:p-8 p-3 hover:bg-[#434348] hover:text-white text-xl roie font-normal rounded-xl cursor-pointer"
     >
       <div className="block ml-10 ">
-        <span className="text-sm"> 0{index + 1} &ensp;</span>
+        <span className="text-sm"> {index + 1} &ensp;</span>
         <span>{text}</span>
       </div>
     </div>
