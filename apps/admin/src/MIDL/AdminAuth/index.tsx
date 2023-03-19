@@ -30,9 +30,11 @@ export default function Admin({ }: Props) {
               className="bg-slate-100 hover:bg-slate-300 text-black"
               leftIcon={<img src={GOOGLEIMG} alt="google sign in" />}
               onClick={async () => {
+                
                 try {
                   await signInWithPopup(auth, provider)
-                } catch (error: any) {
+                } 
+                catch (error: any) {
                   showNotification({
                     id: `reg-err-${Math.random()}`,
                     autoClose: 5000,

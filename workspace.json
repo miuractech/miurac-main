@@ -4,6 +4,8 @@
   "projects": {
     "admin": "apps/admin",
     "admin-e2e": "apps/admin-e2e",
+    "client": "apps/client",
+    "client-e2e": "apps/client-e2e",
     "employee-portal": "apps/employee-portal",
     "employee-portal-e2e": "apps/employee-portal-e2e",
     "miurac-files": "libs/miurac-files",
