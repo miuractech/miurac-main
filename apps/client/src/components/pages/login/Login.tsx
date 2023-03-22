@@ -3,8 +3,36 @@ import rocketPic from '../../images/rocket.svg';
 import googleIcon from '../../images/icons/google.svg';
 import { TextInput , Divider , PasswordInput , Button } from '@mantine/core';
 import { Link } from 'react-router-dom';
+import Footer from '../../layout/Footer';
+import { signInWithPopup , signInWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
+import { useState } from 'react';
+import { auth } from '../../config/firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
-export default function Login(){
+interface loginProps {
+    clickFunction : () => void
+}
+
+
+
+export default function Login(clickFunction : loginProps){
+    // const auth = getAuth();
+    const [email , setEmail] = useState('');
+    const [password , setPassword] = useState('');
+    const navigate = useNavigate();
+    
+
+
+    const provider = new GoogleAuthProvider();
+    const signInWithGoogle = () => {
+        try {
+            signInWithPopup(auth , provider);
+            navigate('/');
+        } catch (error : any) {
+            alert(error.message);
+        }
+    }
+
     return(
         <div>
             <div className='h-[90vh] w-full bg-[#E0E6EC] flex justify-center items-center'>
@@ -16,7 +44,9 @@ export default function Login(){
                     <div className='bg-[#F0F3F8] flex justify-center items-center'>
                         <div className='w-[90%] mx-auto flex flex-col justify-center items-center p-[12px]'>
                             <h5 className='font[20px] font-bold text-center '>Welcome Back Login</h5>
-                            <button className='m-5 rounded-[10px] bg-white px-4 py-2 flex text-[14px] font-[600]'>
+                            <button 
+                                onClick={signInWithGoogle}
+                                className='m-5 rounded-[10px] bg-white px-4 py-2 flex text-[14px] font-[600]'>
                                 <img src={googleIcon} alt="google" />
                                 &nbsp;&nbsp;&nbsp;Sign In with Google
                             </button>
@@ -32,7 +62,10 @@ export default function Login(){
                                         width:'80%'
                                     }}
                                     label="Email" 
-                                    placeholder='Email id' />
+                                    placeholder='Email id' 
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    />
                                     <PasswordInput 
                                         style = {{
                                             padding:'8px',
@@ -44,18 +77,21 @@ export default function Login(){
                                         }}
                                         label='Password'
                                         placeholder='Password'
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                     <Button style={{'width':'80%','margin':'10px',borderRadius:'10px',background:'black'}} color='dark' size={'md'}>
                                         Get Started
                                     </Button>
-                                    <p className='text-[12px] p-2 font-[600] text-[grey] text-center'>
-                                        Not have an account? <Link to='/sign-up' className='text-black'>Signup</Link>
+                                    <p className='text-[12px] p-2 font-[600] text-[grey] text-center flex'>
+                                        Not have an account? <button className='text-black' onClick={() => clickFunction}>Signup</button>
                                     </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

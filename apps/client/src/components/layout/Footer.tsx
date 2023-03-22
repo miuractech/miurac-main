@@ -31,7 +31,7 @@ export default function Footer() {
   );
   return (
     <div className="bg-black h-auto">
-        <div className='p-[15px] flex justify-between items-start'>
+        <div className='p-[15px] flex flex-wrap justify-between items-start'>
             <div>
                     <h1 className="text-[#E0E5EC] ml-[132px] font-black text-5xl pt-[51px]">MIURAC</h1>
                     <div>

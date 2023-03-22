@@ -1,20 +1,33 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
-
-
-import { Route, Routes, Link } from 'react-router-dom';
-import Login from '../components/pages/login/Login';
 import Navbar from '../components/layout/Navbar';
-import Signup from '../components/pages/signup/Signup';
+import { useEffect , useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import Dashboard from '../components/pages/dashboard/dashboard';
+import Initial from '../components/pages/initialPage/Initial';
+
 
 export function App() {
+  const [userDetails , setUserDetails] = useState<any | null>(null);
+
+  const auth1 = getAuth();
+
+  useEffect(() => {
+    auth1.onAuthStateChanged(
+      (user) => {
+        setUserDetails(user);
+      }
+    );
+  })
+
+
   return (
     <div>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/sign-up" element={<Signup />} />
-      </Routes>
+      {
+        userDetails 
+        ? <Dashboard />
+        : <Initial />
+      }
+      
     </div>
   );
 }

@@ -2,14 +2,18 @@ import React from 'react';
 import pic from '../../images/champion.svg';
 import googleIcon from '../../images/icons/google.svg';
 import { TextInput , Divider , PasswordInput , Button } from '@mantine/core';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Footer from '../../layout/Footer';
 
-export default function Signup(){
+interface signUpProps {
+    clickFunction: () => void
+}
+
+export default function Signup(clickFunction : signUpProps){
     return(
         <div>
-            <div className='h-[90vh] w-full bg-[#E0E6EC] flex xd:flex-col justify-center items-center p-[20px]'>
-                <div className='h-auto p-[20px] w-[75%] sl:w-[90%] mx-auto grid grid-cols-2 xd:grid-cols-1 bg-white rounded-[15px]'>
+            <div className='h-[90vh] w-full bg-[#E0E6EC] flex justify-center items-center p-[5%] xd:flex-col xd:h-auto'>
+                <div className='h-auto p-[20px] w-[75%] mx-auto grid grid-cols-2 bg-white rounded-[15px] sl:w-[90%] xd:grid-cols-1'>
                     <div className='flex flex-col justify-center items-center'>
                         <img src={pic} alt="login pic" />
                         <h5 className='font-bold'>Build your next unicorn with us!</h5>
@@ -66,8 +70,13 @@ export default function Signup(){
                                     <Button style={{'width':'80%','margin':'10px',borderRadius:'10px',background:'black'}} color='dark' size={'md'}>
                                         Get Started
                                     </Button>
-                                    <p className='text-[12px] p-2 font-[600] text-[grey] text-center'>
-                                        Already have an account? <Link to='/' className='text-black'>Login</Link>
+                                    <p className='text-[12px] p-2 font-[600] text-[grey] text-center flex'>
+                                        Already have an account? 
+                                        <button 
+                                            className='text-black' 
+                                            onClick={() => clickFunction}
+                                            >Login
+                                        </button>
                                     </p>
                             </div>
                         </div>
