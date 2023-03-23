@@ -13,7 +13,7 @@ export default function PasswordChange() {
   const [password , setPassword] = useState('');
   const [confirmPassword , setConfirmPassword] = useState('');
   const [user , setUser] = useState<any | null>(null);
-  const auth = getAuth();
+//   const auth = getAuth();
 
   const email = localStorage.getItem('email');
 
@@ -25,6 +25,8 @@ export default function PasswordChange() {
         if(password === confirmPassword){
             try {
                 // user?.updatePassword(password);
+                
+                
                 console.log('Password updated successfully');
                 
             } catch (error : any) {
