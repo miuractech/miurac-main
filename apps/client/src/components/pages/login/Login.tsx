@@ -18,19 +18,29 @@ interface loginProps {
 export default function Login(clickFunction : loginProps){
     // const auth = getAuth();
     const [email , setEmail] = useState('');
-    const [password , setPassword] = useState('');
-    const navigate = useNavigate();
-    
+    const [password , setPassword] = useState('');  
+    const navigate = useNavigate();  
 
 
     const provider = new GoogleAuthProvider();
     const signInWithGoogle = () => {
         try {
             signInWithPopup(auth , provider);
-            navigate('/');
         } catch (error : any) {
             alert(error.message);
         }
+    }
+
+    const handleSignInWithEmailAndPassword = () => {
+        try {
+            signInWithEmailAndPassword(auth , email , password);
+        } catch (error : any) {
+            alert(error.message);
+        }
+    }
+
+    const switchSignUp = () => {
+        clickFunction.clickFunction();
     }
 
     return(
@@ -53,6 +63,7 @@ export default function Login(clickFunction : loginProps){
                             <Divider label="OR" my="xs" labelPosition="center"/>
                             <div className='w-full flex flex-col justify-center items-center'>
                                 <TextInput 
+                                    withAsterisk
                                     style = {{
                                         padding:'8px',
                                         fontSize:'16px',
@@ -66,13 +77,14 @@ export default function Login(clickFunction : loginProps){
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     />
-                                    <PasswordInput 
+                                    <PasswordInput
+                                        withAsterisk 
                                         style = {{
                                             padding:'8px',
                                             fontSize:'16px',
                                             fontWeight:'600',
                                             outline:'none',
-                                            margin:'10px',
+                                            marginTop:'10px',
                                             width:'80%'
                                         }}
                                         label='Password'
@@ -80,11 +92,22 @@ export default function Login(clickFunction : loginProps){
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
-                                    <Button style={{'width':'80%','margin':'10px',borderRadius:'10px',background:'black'}} color='dark' size={'md'}>
+                                    <div className='p-0 m-0 flex justify-end text-left mx-auto items-end w-[80%]'>
+                                        <Link to='/forgot-password'> 
+                                            <h5 className='font-[600] text-[12px]'>
+                                                Forgot Password?
+                                            </h5>
+                                        </Link>
+                                    </div>
+                                    <Button 
+                                        onClick={handleSignInWithEmailAndPassword}
+                                        style={{'width':'80%','margin':'10px',borderRadius:'10px',background:'black'}} 
+                                        color='dark' 
+                                        size={'md'}>
                                         Get Started
                                     </Button>
                                     <p className='text-[12px] p-2 font-[600] text-[grey] text-center flex'>
-                                        Not have an account? <button className='text-black' onClick={() => clickFunction}>Signup</button>
+                                        Not have an account? <button className='text-black' onClick={switchSignUp}>Signup</button>
                                     </p>
                             </div>
                         </div>
