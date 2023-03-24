@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { sendPasswordResetEmail , getAuth } from 'firebase/auth';
 
 
+
 export default function ForgetPassword() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();

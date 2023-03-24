@@ -2,20 +2,29 @@ import react, { useEffect } from 'react';
 import setting from '../../images/settings.svg';
 import { Button, PasswordInput } from '@mantine/core';
 import Email from '../../images/email.svg';
-import { getAuth } from 'firebase/auth';
+import { auth } from '../../config/firebaseConfig';
 import firebase from 'firebase/compat/app';
 import { useState } from 'react';
 
 
 
 export default function PasswordChange() {
+  const currentUrl = new URL(window.location.href);
+  const mode = currentUrl.searchParams.get('mode');
+  console.log(auth.currentUser);
+  const code = currentUrl.searchParams.get('oobCode');
+  const apiKey = currentUrl.searchParams.get('apiKey');
+  console.log("code: ",code);
+  console.log("apiKey: ",apiKey);
+  
+  
 
   const [password , setPassword] = useState('');
   const [confirmPassword , setConfirmPassword] = useState('');
   const [user , setUser] = useState<any | null>(null);
 //   const auth = getAuth();
 
-  const email = localStorage.getItem('email');
+  // const email = localStorage.getItem('email');
 
 
 
@@ -24,9 +33,6 @@ export default function PasswordChange() {
     const passwordChangeHandler = () => {
         if(password === confirmPassword){
             try {
-                // user?.updatePassword(password);
-                
-                
                 console.log('Password updated successfully');
                 
             } catch (error : any) {

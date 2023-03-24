@@ -5,7 +5,6 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getFunctions } from "firebase/functions"
 import { getAnalytics } from "firebase/analytics";
-import firebase from "firebase/compat";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAbr--aFrtWdmIzaB5dmbsPSglNL0ZXHGg",

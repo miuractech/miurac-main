@@ -19,7 +19,7 @@ export default function Login(clickFunction : loginProps){
     // const auth = getAuth();
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');  
-    const navigate = useNavigate();  
+    // const navigate = useNavigate();  
 
 
     const provider = new GoogleAuthProvider();

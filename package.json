@@ -10,6 +10,7 @@
   "private": true,
   "dependencies": {
     "@bundled-es-modules/pdfjs-dist": "^2.5.207-rc1",
+    "@coreui/react": "^4.7.0",
     "@emotion/react": "^11.10.4",
     "@mantine/carousel": "^5.3.3",
     "@mantine/core": "^5.3.3",
@@ -38,6 +39,7 @@
     "lottie-react": "^2.3.1",
     "pdfjs": "^2.4.7",
     "react": "18.2.0",
+    "react-avatar": "^5.0.3",
     "react-beautiful-dnd": "^13.1.1",
     "react-data-table-component": "^7.5.3",
     "react-dom": "18.2.0",
@@ -48,6 +50,7 @@
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.0",
     "react-scroll-wheel-handler": "^2.2.0",
+    "react-swal": "^4.0.0",
     "regenerator-runtime": "0.13.7",
     "styled-components": "^5.3.6",
     "tabler-icons-react": "^1.55.0",

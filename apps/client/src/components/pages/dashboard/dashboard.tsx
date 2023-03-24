@@ -5,7 +5,6 @@ import { getAuth } from "firebase/auth";
 export default function Dashboard() {
 
     const auth = getAuth();
-
     const handleLogout = () => {
         auth.signOut();
     }
@@ -16,6 +15,12 @@ export default function Dashboard() {
       <h1>
         <button onClick={handleLogout}>Logout</button>
       </h1>
+      <div className="">
+
+      </div>
+      <div>
+
+      </div>
     </div>
   );
 }
