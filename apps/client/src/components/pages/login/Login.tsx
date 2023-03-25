@@ -8,6 +8,8 @@ import { signInWithPopup , signInWithEmailAndPassword, GoogleAuthProvider } from
 import { useState } from 'react';
 import { auth } from '../../config/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
+import { setUser } from '../../config/redux/store/authSlice';
+import { useDispatch } from 'react-redux';
 
 interface loginProps {
     clickFunction : () => void
@@ -18,14 +20,16 @@ interface loginProps {
 export default function Login(clickFunction : loginProps){
     // const auth = getAuth();
     const [email , setEmail] = useState('');
-    const [password , setPassword] = useState('');  
+    const [password , setPassword] = useState(''); 
+    const dispatch = useDispatch(); 
     // const navigate = useNavigate();  
 
 
     const provider = new GoogleAuthProvider();
     const signInWithGoogle = () => {
         try {
-            signInWithPopup(auth , provider);
+            const userDetails = signInWithPopup(auth , provider);
+            dispatch(setUser(userDetails));
         } catch (error : any) {
             alert(error.message);
         }
@@ -33,7 +37,12 @@ export default function Login(clickFunction : loginProps){
 
     const handleSignInWithEmailAndPassword = () => {
         try {
-            signInWithEmailAndPassword(auth , email , password);
+            const userDetails = 
+                    signInWithEmailAndPassword(
+                            auth , 
+                            email , 
+                            password);
+            dispatch(setUser(userDetails));
         } catch (error : any) {
             alert(error.message);
         }

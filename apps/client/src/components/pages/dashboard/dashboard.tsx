@@ -12,15 +12,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1>
-        <button onClick={handleLogout}>Logout</button>
-      </h1>
-      <div className="">
-
-      </div>
-      <div>
-
-      </div>
+      
     </div>
   );
 }

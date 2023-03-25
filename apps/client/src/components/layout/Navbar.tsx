@@ -32,11 +32,10 @@ export default function Navbar() {
   const handleLogout = () => {
     try {
       auth.signOut();
-      setUser(null);
     } catch(error){
       console.log(error);
-      
     }
+    setUser(null);
   }
   
 
