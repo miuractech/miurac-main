@@ -1,18 +1,18 @@
 import React from "react";
-import { getAuth } from "firebase/auth";
+import Step1 from "./steps/Step1";
+import Step2 from "./steps/Step2";
+import Detail1 from "./details/Detail1";
+import Detail2 from "./details/Detail2";
 
 
-export default function Dashboard() {
-
-    const auth = getAuth();
-    const handleLogout = () => {
-        auth.signOut();
-    }
 
 
-  return (
-    <div>
-      
-    </div>
-  );
+export default function Dashboard(){
+    return(
+        <div className="p-3">
+            {/* <Step2 />
+             */}
+            <Detail1 />
+        </div>
+    );
 }

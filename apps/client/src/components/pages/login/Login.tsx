@@ -10,10 +10,21 @@ import { auth } from '../../config/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../config/redux/store/authSlice';
 import { useDispatch } from 'react-redux';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
 interface loginProps {
     clickFunction : () => void
 }
+
+const schema = yup.object().shape({
+    email: yup.string().email('Please enter a valid email address').required('email cannot be empty'),
+    password: yup.string().required().min(8, 'Password must be atleast 8 characters').max(16, 'Password must not exceed 16 characters').matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Min. 8 characters, at least one uppercase, one lowercase, one number and one special character"
+    )
+  }).required();
 
 
 
@@ -21,8 +32,16 @@ export default function Login(clickFunction : loginProps){
     // const auth = getAuth();
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState(''); 
+    const [error, setError] = useState<any>(null)
+    // const form = useForm({
+    //     validate: yupResolver(schema),
+    //         initialValues: {
+    //             email: '',
+    //             password: '',
+    //         }
+
+    // });
     const dispatch = useDispatch(); 
-    // const navigate = useNavigate();  
 
 
     const provider = new GoogleAuthProvider();
@@ -37,14 +56,31 @@ export default function Login(clickFunction : loginProps){
 
     const handleSignInWithEmailAndPassword = () => {
         try {
-            const userDetails = 
-                    signInWithEmailAndPassword(
-                            auth , 
-                            email , 
-                            password);
-            dispatch(setUser(userDetails));
-        } catch (error : any) {
-            alert(error.message);
+
+            if(email!=null && password!=null){
+                const userDetails = 
+                        signInWithEmailAndPassword(
+                                auth , 
+                                email , 
+                                password);
+                dispatch(setUser(userDetails));
+            }
+            
+            // if(errors.email || errors.password){return}
+            // else {
+            // }
+
+        } catch (error:any) {
+            const newErrors : any = {
+                email: '',
+                password: '',
+            };
+            error.inner.forEach((e : any) => {
+                newErrors['email'] = e.email;
+                newErrors['password'] = e.password;
+
+            });
+           
         }
     }
 
@@ -71,6 +107,7 @@ export default function Login(clickFunction : loginProps){
                             </button>
                             <Divider label="OR" my="xs" labelPosition="center"/>
                             <div className='w-full flex flex-col justify-center items-center'>
+                                <form onSubmit={handleSignInWithEmailAndPassword}>
                                 <TextInput 
                                     withAsterisk
                                     style = {{
@@ -85,7 +122,9 @@ export default function Login(clickFunction : loginProps){
                                     placeholder='Email id' 
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    // error={errors.email}
                                     />
+                                    {/* <h5 className='text-[red] p-2 text-[14px]'>{errors.email}</h5> */}
                                     <PasswordInput
                                         withAsterisk 
                                         style = {{
@@ -99,8 +138,12 @@ export default function Login(clickFunction : loginProps){
                                         label='Password'
                                         placeholder='Password'
                                         value={password}
+                                        // {...form.getInputProps('password')}
                                         onChange={(e) => setPassword(e.target.value)}
+                                        // error={errors.password}
                                     />
+                                    {/* <h5 className='text-[red] p-2 text-[14px]'>{errors.email}</h5> */}
+
                                     <div className='p-0 m-0 flex justify-end text-left mx-auto items-end w-[80%]'>
                                         <Link to='/forgot-password'> 
                                             <h5 className='font-[600] text-[12px]'>
@@ -109,12 +152,13 @@ export default function Login(clickFunction : loginProps){
                                         </Link>
                                     </div>
                                     <Button 
-                                        onClick={handleSignInWithEmailAndPassword}
+                                        type='submit'
                                         style={{'width':'80%','margin':'10px',borderRadius:'10px',background:'black'}} 
                                         color='dark' 
                                         size={'md'}>
                                         Get Started
                                     </Button>
+                                    </form>
                                     <p className='text-[12px] p-2 font-[600] text-[grey] text-center flex'>
                                         Not have an account? <button className='text-black' onClick={switchSignUp}>Signup</button>
                                     </p>

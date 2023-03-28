@@ -1,7 +1,7 @@
 import Navbar from '../components/layout/Navbar';
 import { useEffect , useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import Dashboard from '../components/pages/dashboard/dashboard';
+import Dashboard from '../components/pages/dashboard/Dashboard';
 import Initial from '../components/pages/initialPage/Initial';
 import { Routes , Route } from 'react-router-dom';
 import ForgotPassword from '../components/pages/forgot-password/ForgotPassword';
