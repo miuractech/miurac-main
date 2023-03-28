@@ -5,15 +5,25 @@ import { CloseButton } from '@mantine/core';
 import backBtn from '../../../images/icons/backbtn.svg';
 import { Chip } from '@mantine/core';
 
+interface Detail1Props {
+    nextStep: () => void;
+    prevStep: () => void;
+}
 
-export default function Detail1() {
+
+export default function Detail1(props: Detail1Props) {
     const [value, setValue] = React.useState<string[]>([]);
+
+    console.log(value);
+    
 
 
     return(
         <div>
             <div className="bg-[#DEBF43] h-[500px] relative rounded-[20px] p-3">
-                    <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
+                    <button onClick={props.prevStep}>
+                        <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
+                    </button>
                     <CloseButton size={45} color='black' className='absolute right-3 top-2'/>
                 <div>
                     <h5 className="text-center text-black text-[12px] p-2">1/7</h5>
@@ -39,6 +49,7 @@ export default function Detail1() {
                                 </Chip.Group>
                             </div>
                             <Button 
+                                onClick={props.nextStep}
                                 className="w-[80%] h-[40px] mt-[80px] block mx-auto bg-black text-[16px] text-white px-5  rounded-[10px] hover:bg-black">
                                 Next
                         </Button>

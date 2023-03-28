@@ -1,16 +1,30 @@
 import React from "react";
+import { useState } from "react";
 import { Button , TextInput } from "@mantine/core";
 import { CloseButton } from '@mantine/core';
+import { IconReload } from "@tabler/icons";
 import backBtn from '../../../images/icons/backbtn.svg';
 import paintBrushImg from '../../../images/paint-brush.svg';
 import paintPalleteImg from '../../../images/paint-palette.svg';
-import { Select } from '@mantine/core';
+import { Select , ActionIcon, ColorInput } from '@mantine/core';
 
-export default function Detail2() {
+const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
+interface Detail2Props {
+    nextStep: () => void;
+    prevStep: () => void;
+}
+
+
+export default function Detail2(props: Detail2Props) {
+    const [value, onChange] = useState(randomColor());
+
     return(
         <div>
             <div className="bg-[#19CC8B] h-[500px] relative rounded-[20px] p-3">
-                    <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
+                    <button onClick={props.prevStep}>
+                        <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
+                    </button>
                     <CloseButton size={45} color='black' className='absolute right-3 top-2'/>
                 <div>
                     <h5 className="text-center text-black text-[12px] p-2">2/7</h5>
@@ -21,15 +35,26 @@ export default function Detail2() {
                             <img src={paintBrushImg} alt="paintBrushImg" />
                         </div>
                         <div>
-                            <h3 className="text-white text-[24px] font-bold">Select your Requirement:</h3>
+                            <h3 className="text-white text-[24px] font-bold">Do you have any brand or sentiment color?</h3>
                             <div className="flex justify-center items-center m-4">
                                 <img src={paintPalleteImg} alt="paintPalleteImg" className="mr-2" />
-                                <h5 className="text-white">Base Color :{' '}</h5>
-                                
+                                <h5 className="text-white">Base Color : {' '}</h5>
+                                <ColorInput
+                                        className="w-[200px] ml-2"
+                                        placeholder="Pick color"
+                                        value={value}
+                                        onChange={onChange}
+                                        rightSection={
+                                            <ActionIcon onClick={() => onChange(randomColor())}>
+                                                <IconReload size="1rem" />
+                                            </ActionIcon>
+                                        }
+                                />
                                 
                             </div>
                             
                             <Button 
+                                onClick={props.nextStep}
                                 className="w-[80%] h-[40px] mt-[80px] block mx-auto bg-black text-[16px] text-white px-5  rounded-[10px] hover:bg-black">
                                 Next
                         </Button>

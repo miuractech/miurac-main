@@ -4,12 +4,19 @@ import { Button, TextInput } from '@mantine/core';
 import { CloseButton } from '@mantine/core';
 import backBtn from '../../../images/icons/backbtn.svg';
 
+interface Step2Props {
+    nextStep: () => void;
+    prevStep: () => void;
+}
 
-export default function Step2(){
+
+export default function Step2(props: Step2Props){
     return(
         <div>
             <div className="bg-[#1798F4] relative rounded-[15px] h-[400px] flex flex-col justify-center items-center">
-                        <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
+                        <button onClick={props.prevStep}>
+                            <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
+                        </button>
                         <CloseButton size={45} color='black' className='absolute right-3 top-2'/>
                 <div className="flex justify-center items-center">
                     <div>
@@ -22,6 +29,7 @@ export default function Step2(){
                             className="w-[300px] h-[40px] p-3 rounded-[20px]" 
                         />
                         <Button 
+                            onClick={props.nextStep}
                             className="w-[80%] h-[40px] mt-[80px] block mx-auto bg-black text-[16px] text-white px-5  rounded-[10px] hover:bg-black">
                             Next
                     </Button>
