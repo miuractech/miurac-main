@@ -32,7 +32,7 @@ export default function Login(clickFunction : loginProps){
     // const auth = getAuth();
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState(''); 
-    const [error, setError] = useState<any>(null)
+    // const [error, setError] = useState<any>(null)
     // const form = useForm({
     //     validate: yupResolver(schema),
     //         initialValues: {
@@ -78,9 +78,7 @@ export default function Login(clickFunction : loginProps){
             error.inner.forEach((e : any) => {
                 newErrors['email'] = e.email;
                 newErrors['password'] = e.password;
-
             });
-           
         }
     }
 
@@ -90,7 +88,7 @@ export default function Login(clickFunction : loginProps){
 
     return(
         <div>
-            <div className='h-[90vh] w-full bg-[#E0E6EC] flex justify-center items-center'>
+            <div className='h-[90vh] w-full md:flex-col bg-[#E0E6EC] flex justify-center items-center'>
                 <div className='h-[80vh] w-[75%] mx-auto grid grid-cols-2 bg-white rounded-[15px]'>
                     <div className='flex flex-col justify-center items-center'>
                         <img src={rocketPic} alt="login pic" />
@@ -133,6 +131,7 @@ export default function Login(clickFunction : loginProps){
                                             fontWeight:'600',
                                             outline:'none',
                                             marginTop:'10px',
+                                            margin:'10px',
                                             width:'80%'
                                         }}
                                         label='Password'

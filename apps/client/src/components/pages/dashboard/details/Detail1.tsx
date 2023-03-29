@@ -4,10 +4,12 @@ import targetImg from '../../../images/target.svg';
 import { CloseButton } from '@mantine/core';
 import backBtn from '../../../images/icons/backbtn.svg';
 import { Chip } from '@mantine/core';
+import closeIcon from '../../../images/icons/closeIcon.svg';
 
 interface Detail1Props {
     nextStep: () => void;
     prevStep: () => void;
+    setInit: () => void;
 }
 
 
@@ -19,12 +21,15 @@ export default function Detail1(props: Detail1Props) {
 
 
     return(
-        <div>
+        <div className='w-full'>
             <div className="bg-[#DEBF43] h-[500px] relative rounded-[20px] p-3">
                     <button onClick={props.prevStep}>
                         <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
                     </button>
-                    <CloseButton size={45} color='black' className='absolute right-3 top-2'/>
+                    <button onClick={props.setInit}>
+                            <img src={closeIcon} alt='closeBtn' className='absolute right-3 top-3' />
+                    </button>
+                    {/* <CloseButton size={45} color='black' className='absolute right-3 top-2'/> */}
                 <div>
                     <h5 className="text-center text-black text-[12px] p-2">1/7</h5>
                 </div>

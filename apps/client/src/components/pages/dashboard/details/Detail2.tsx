@@ -7,12 +7,16 @@ import backBtn from '../../../images/icons/backbtn.svg';
 import paintBrushImg from '../../../images/paint-brush.svg';
 import paintPalleteImg from '../../../images/paint-palette.svg';
 import { Select , ActionIcon, ColorInput } from '@mantine/core';
+import greenGradient from '../../../images/GreenGradient.svg';
+import closeIcon from '../../../images/icons/closeIcon.svg';
+
 
 const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
 interface Detail2Props {
     nextStep: () => void;
     prevStep: () => void;
+    setInit : () => void;
 }
 
 
@@ -20,12 +24,17 @@ export default function Detail2(props: Detail2Props) {
     const [value, onChange] = useState(randomColor());
 
     return(
-        <div>
-            <div className="bg-[#19CC8B] h-[500px] relative rounded-[20px] p-3">
+        <div className="w-full">
+            <div
+                style={{ backgroundImage: `url(${greenGradient})` }} 
+                className="h-[500px] relative rounded-[20px] p-3">
                     <button onClick={props.prevStep}>
                         <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
                     </button>
-                    <CloseButton size={45} color='black' className='absolute right-3 top-2'/>
+                    <button onClick={props.setInit}>
+                            <img src={closeIcon} alt='closeBtn' className='absolute right-3 top-3' />
+                    </button>
+                    {/* <CloseButton size={45} color='black' className='absolute right-3 top-2'/> */}
                 <div>
                     <h5 className="text-center text-black text-[12px] p-2">2/7</h5>
                 </div>

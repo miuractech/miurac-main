@@ -1,23 +1,29 @@
 import React from 'react';
 import bulbImg from '../../../images/icons/bulb.svg';
 import { Button, TextInput } from '@mantine/core';
-import { CloseButton } from '@mantine/core';
 import backBtn from '../../../images/icons/backbtn.svg';
+import bgImg from '../../../images/step2gradient.svg';
+import closeIcon from '../../../images/icons/closeIcon.svg';
 
 interface Step2Props {
     nextStep: () => void;
     prevStep: () => void;
+    setInit: () => void;
 }
 
 
 export default function Step2(props: Step2Props){
     return(
-        <div>
-            <div className="bg-[#1798F4] relative rounded-[15px] h-[400px] flex flex-col justify-center items-center">
+        <div className='w-full'>
+            <div
+                style={{backgroundImage: `url(${bgImg})`}} 
+                className="bg-cover bg-center relative rounded-[15px] h-[400px] flex flex-col justify-center items-center">
                         <button onClick={props.prevStep}>
                             <img src={backBtn} alt='backBtn' className='absolute left-3 top-3'/>
                         </button>
-                        <CloseButton size={45} color='black' className='absolute right-3 top-2'/>
+                        <button onClick={props.setInit}>
+                            <img src={closeIcon} alt='closeBtn' className='absolute right-3 top-3' />
+                        </button>
                 <div className="flex justify-center items-center">
                     <div>
                         <img src={bulbImg} alt="bulb" />

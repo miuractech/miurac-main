@@ -1,5 +1,6 @@
 import React, { useEffect , useState } from 'react';
 import logo from '../images/miurac-logo.svg';
+import miuracDashLogo from '../images/miurac-logo-das.svg';
 import { getAuth, reload } from 'firebase/auth';
 import msgIcon from '../images/icons/message.svg';
 import linkTabIcon from '../images/icons/linkTabIcon.svg';
@@ -7,6 +8,7 @@ import { Menu } from '@mantine/core';
 import { IconArrowDown } from '@tabler/icons';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { IconArrowLeft } from '@tabler/icons';
 
 export default function Navbar() {
   const auth = getAuth();
@@ -45,8 +47,10 @@ export default function Navbar() {
         userDetails
         ? (
           <div className='h-[70px] p-[10px] justify-between items-center flex'>
-            <div>
-              <img src={logo} alt='miurac-logo' />
+            
+            <div className='relative'>
+              
+              <img src={miuracDashLogo} alt='miurac-logo' />
             </div>
             <div className='flex items-center'>
               {navBtns.map((item) => {

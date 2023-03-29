@@ -4,11 +4,15 @@ import Footer from '../../layout/Footer';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { sendPasswordResetEmail , getAuth } from 'firebase/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState('');
+  const [link , isLinkSent] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth();
 
@@ -16,8 +20,18 @@ export default function ForgetPassword() {
   const resetPasswordHandler = async() => {
     try{
       await sendPasswordResetEmail(auth , email);
+      isLinkSent(true);
+
+      if(link){
+        toast.success('Email sent successfully!', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        setEmail('');
+        navigate('/');
+      }
+
       localStorage.setItem('email' , email);
-      navigate('/');
+      // navigate('/');
     } catch (error : any) {
       alert(error.message);
     }

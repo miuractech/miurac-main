@@ -55,13 +55,13 @@ export default function Footer() {
             <div>
                 <div className="font-normal text-[#9CA5B1] text-[22px] pt-[51px] p-3">Services</div>
                 {services.map((item, i) => (
-                <div className="text-[#FBFBFD] p-3 text-[16px]">{item}</div>
+                    <div className="text-[#FBFBFD] p-3 text-[16px]">{item}</div>
                 ))}
             </div>
             <div>
                 <div className='font-normal text-[#9CA5B1] text-[22px] pt-[51px] p-3'>Quick links</div>
                 {quicklinks.map((item, i) => (
-                <div className='text-[#FBFBFD] p-3 text-[16px]'>{item}</div>
+                    <div className='text-[#FBFBFD] p-3 text-[16px]'>{item}</div>
                 ))}
             </div>
             <div>
