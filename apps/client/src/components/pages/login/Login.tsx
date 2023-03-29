@@ -88,8 +88,8 @@ export default function Login(clickFunction : loginProps){
 
     return(
         <div>
-            <div className='h-[90vh] w-full md:flex-col bg-[#E0E6EC] flex justify-center items-center'>
-                <div className='h-[80vh] w-[75%] mx-auto grid grid-cols-2 bg-white rounded-[15px]'>
+            <div className='h-[90vh] w-full md:flex-col flex-row  bg-[#E0E6EC] flex justify-center items-center'>
+                <div className='h-[80vh] w-[75%] mx-auto md:grid-cols-2 grid grid-cols-1 bg-white rounded-[15px]'>
                     <div className='flex flex-col justify-center items-center'>
                         <img src={rocketPic} alt="login pic" />
                         <h5 className='font-bold'>Turn Your Ideas into products</h5>
