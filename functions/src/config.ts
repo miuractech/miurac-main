@@ -3,4 +3,5 @@ import * as admin from "firebase-admin";
 // https://firebase.google.com/docs/functions/typescript
 export const app = admin.initializeApp();
 export const firestore = app.firestore();
+export const storage = app.storage();
 export const auth = app.auth();

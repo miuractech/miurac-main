@@ -1,21 +1,29 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Button, Checkbox, Modal, TextInput } from '@mantine/core';
+import {DatePicker} from "@mantine/dates"
 import { useForm, yupResolver } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { employeeAccess } from '@miurac/resources';
 import { IconX } from '@tabler/icons';
 import { collection, doc, setDoc } from 'firebase/firestore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as yup from 'yup';
 import { db } from '../../config/firebaseConfig';
 import { defaultErrorMessage } from '../../constants';
+import { httpsCallable } from 'firebase/functions';
+import { functions } from '../../config/firebaseConfig';
+import { staffType } from '.';
 // eslint-disable-next-line @typescript-eslint/ban-types
-type Props = {};
+type Props = {
+  data?: staffType;
+  setData?: React.Dispatch<React.SetStateAction<staffType[] | undefined>>;
+};
 
 // eslint-disable-next-line no-empty-pattern
-export default function AddEmployee({}: Props) {
+export default function AddEmployee({ data, setData }: Props) {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const form = useForm<{ 
+  const form = useForm<{
     email: string;
     name: string;
     access: string[];
@@ -36,9 +44,21 @@ export default function AddEmployee({}: Props) {
       })
     ),
   });
+  useEffect(() => {
+    if (data) {
+      form.setValues(data);
+      //@ts-ignore
+      form.setFieldValue('doj',data.doj.toDate());
+    } else {
+      form.reset();
+    }
+  }, [data]);
+
   return (
     <div>
-      <Button onClick={() => setModal(true)}>Add Employee</Button>
+      <Button onClick={() => setModal(true)}>
+        {data ? 'Edit Employee' : 'Add Employee'}
+      </Button>
       <Modal
         centered
         transition={'slide-down'}
@@ -50,7 +70,10 @@ export default function AddEmployee({}: Props) {
           onSubmit={form.onSubmit(async (data) => {
             try {
               setLoading(true);
-              await setDoc(doc(collection(db, 'employees'), data.email), data);
+              const getUID = httpsCallable(functions, 'getUserUidByEmail');
+              const res = (await getUID({ email: data.email })) as any;
+              const uid = res.data.uid;
+              await setDoc(doc(collection(db, 'employees'), uid), data);
               setLoading(false);
               setModal(false);
               showNotification({
@@ -63,7 +86,6 @@ export default function AddEmployee({}: Props) {
                 loading: false,
               });
             } catch (err) {
-              console.log(err);
               showNotification({
                 id: `reg-err-${Math.random()}`,
                 autoClose: 5000,
@@ -73,6 +95,7 @@ export default function AddEmployee({}: Props) {
                 icon: <IconX />,
                 loading: false,
               });
+              setLoading(false);
             }
           })}
         >
@@ -87,6 +110,22 @@ export default function AddEmployee({}: Props) {
             placeholder="abc@miurac.com"
             my={16}
             {...form.getInputProps('email')}
+          />
+          <TextInput
+            label="position"
+            placeholder="Developer (react dev)"
+            my={16}
+            {...form.getInputProps('position')}
+          />
+          <DatePicker
+            label="Date of join"
+            my={16}
+            {...form.getInputProps('doj')}
+          />
+          <DatePicker
+            label="ending"
+            my={16}
+            {...form.getInputProps('ending')}
           />
           <Checkbox.Group
             value={form.values.access}

@@ -178,14 +178,14 @@ const navItems = [
   { text: 'About', onclick: () => void 0, link: '/about' },
   { text: 'Case study', onclick: () => void 0, link: '/case-study' },
   { text: 'Careers', onclick: () => void 0, link: '/career' },
+  { text: 'Show Case', onclick: () => void 0, link: '/showcase' },
   { text: 'Contact us', onclick: () => void 0, link: '/contact' },
-  { text: 'Login', onclick: () => void 0, link: '/Login' },
 ];
 
 export const socialItems = [
-  { icon: <IconBrandInstagram />, text: 'Instagram', link: '' },
-  { icon: <IconBrandLinkedin />, text: 'Linked In', link: '' },
-  { icon: <IconBrandYoutube />, text: 'Youtube', link: '' },
+  // { icon: <IconBrandInstagram />, text: 'Instagram', link: '' },
+  { icon: <IconBrandLinkedin />, text: 'Linked In', link: 'https://www.linkedin.com/company/74319023/' },
+  // { icon: <IconBrandYoutube />, text: 'Youtube', link: '' },
 ];
 
 const NavItemComponent = ({
@@ -235,11 +235,11 @@ export const SocialLink = ({
 }) => {
   const media = useMediaQuery('(min-width: 900px)');
   return (
-    <Link to={link}>
+    <a href={link} target='_blank' rel="noreferrer"  >
       <div className="flex items-center gap-1">
         {icon}
         {media && text}
       </div>
-    </Link>
+    </a>
   );
 };

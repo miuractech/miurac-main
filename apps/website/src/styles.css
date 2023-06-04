@@ -1,6 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic);
 @import url(https://fonts.googleapis.com/css?family=ABeeZee:regular,italic);
 @import url(https://fonts.googleapis.com/css?family=Manrope:200,300,regular,500,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Bebas+Neue:regular);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Love+Light:regular);
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 @tailwind components;
 @tailwind utilities;
 
@@ -149,8 +153,10 @@ body {
   background: transparent;
 }
 
-/* html, body {
-  position: fixed;
-  overflow: hidden;
-  overscroll-behavior-y: none;
-} */
+.styled-submit{
+  background: linear-gradient(90deg, #FCFCFC 0%, #C1C1C1 78.69%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+}

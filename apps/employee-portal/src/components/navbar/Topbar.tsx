@@ -1,6 +1,5 @@
-import { AppShell, Burger, Header } from '@mantine/core';
+import { AppShell, Burger, Header, Text } from '@mantine/core';
 import React, { useState } from 'react';
-import Logo from './Logo';
 import LeftBar from './leftBar';
 import { useMediaQuery } from '@mantine/hooks';
 export function NavBar({ children }: { children: React.ReactNode }) {
@@ -24,8 +23,8 @@ export function NavBar({ children }: { children: React.ReactNode }) {
           height={60}
           p="xs"
         >
-          <div />
-          <Logo type="full" color="dark" height={'40'} />
+          {/* <div /> */}
+          <Text align='center' className='text-white w-36 mx-auto' >MIURAC</Text>
           {!mediaQuery && (
             <Burger
               opened={open}

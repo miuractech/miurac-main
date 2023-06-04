@@ -3,11 +3,11 @@ import { showNotification } from '@mantine/notifications';
 import { IconX } from '@tabler/icons';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { httpsCallable } from 'firebase/functions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { NavBar } from '../component/navbar/Topbar';
-import { auth, functions } from '../config/firebaseConfig';
+import { auth, db, functions } from '../config/firebaseConfig';
 import AdminAuth from '../MIDL/AdminAuth';
 import { setUser } from '../MIDL/AdminAuth/redux-slice';
 import Applicant from '../MIDL/applicants';
@@ -17,6 +17,8 @@ import Enquiry from '../MIDL/Enquiry';
 import EnquiryComponent from '../MIDL/Enquiry/enquiry';
 import './app.css';
 import { RootState } from './store';
+import DeckComponent from '../MIDL/deck';
+import {ThreeBsEnquiryComponent} from '@miurac/threebs-enquiry';
 
 export function App() {
   const dispatch = useDispatch();
@@ -80,6 +82,12 @@ export function App() {
           </Route>
           <Route path="/projects" >
             <Route index element={<Employee />} />
+          </Route>
+          <Route path="/deck" >
+            <Route index element={<DeckComponent />} />
+          </Route>
+          <Route path="/threebs" >
+            <Route index element={<ThreeBsEnquiryComponent db={db} />} />
           </Route>
         </Routes>
       </NavBar>

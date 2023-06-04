@@ -1,5 +1,21 @@
 {
   "projects": {
     "default": "miurac-main"
-  }
+  },
+  "targets": {
+    "miurac-main": {
+      "hosting": {
+        "awesome-app": [
+          "awesome-site-d3426"
+        ],
+        "miurac-website": [
+          "miurac-website"
+        ],
+        "investor-miurac": [
+          "investor-miurac"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

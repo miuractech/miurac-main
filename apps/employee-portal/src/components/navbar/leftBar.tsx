@@ -5,11 +5,13 @@ import {
   Group,
   Navbar,
   ScrollArea,
+  Text,
   ThemeIcon,
   useMantineTheme,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import {
+  IconBuildingStore,
   IconChevronLeft,
   IconChevronRight,
   IconFolder,
@@ -23,7 +25,6 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import LeftLink from './LeftLink';
-import Logo from './Logo';
 
 type Props = {
   tooglesize: boolean;
@@ -63,7 +64,7 @@ export default function LeftBar({
         opened={open}
         onClose={() => setOpen(false)}
       >
-        {!mediaQuery && <Logo type="full" color="light" height={'40'} />}
+        {!mediaQuery && <Text align='left' className='text-white' >MIURAC</Text>}
         <NavSections
           tooglesize={tooglesize}
           setTooglesize={setTooglesize}
@@ -88,7 +89,6 @@ export function NavSections({
 }: NavSectionsType) {
   const mediaQuery = useMediaQuery('(min-width: 640px)');
   const claims = useSelector((state:RootState)=>state.user.claims) as any
-  console.log("claims",claims);
   
   return (
     <>
@@ -121,6 +121,15 @@ export function NavSections({
             setOpen={setOpen}
             name="Department"
           />}
+           <LeftLink
+            path={'/threebs'}
+            icon={<IconBuildingStore size={16} color="black" />}
+            color="#e0e0e0"
+            tooglesize={tooglesize}
+            label={'3Bs'}
+            setOpen={setOpen}
+            name="3bs"
+          />
         </Box>
       </Navbar.Section>
       {mediaQuery && (

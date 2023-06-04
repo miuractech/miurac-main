@@ -23,18 +23,18 @@ import inteImg3 from '../../assets/img/inte3.png';
 import inteImg4 from '../../assets/img/inte4.png';
 import inteImg5 from '../../assets/img/inte5.png';
 import inteImg6 from '../../assets/img/inte6.png';
-import React, { useRef } from 'react';
+import React from 'react';
 
 export default function EdufeatCaseStudy() {
   return (
     <Container
       fluid
-      className="px-0 pt-20 manrope"
+      className="px-0 pt-20 md:pt-32 manrope"
       style={{
         background: 'linear-gradient(104.19deg, #FFFFFF 0%, #D9EFFF 71.94%)',
       }}
     >
-      <div className="px-10">
+      <div className="p-10">
         <Title
           weight={800}
           className="md:w-3/4 text-2xl md:text-4xl text-center md:text-left manrope"

@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userReduser from "../MIDL/employeeAuth/redux-slice";
+import personReduser from "../components/onboarding/slice";
 // import departmentReduser from "../MIDL/department/slice";
 // import emailTemplatesReduser from "./emailTemplatesSlice"
 
 export const store = configureStore({
   reducer: {
     user: userReduser,
-    // department: departmentReduser,
+    person: personReduser,
     // templates:emailTemplatesReduser
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({

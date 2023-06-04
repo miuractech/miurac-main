@@ -11,10 +11,12 @@ import {
 import { useMediaQuery } from '@mantine/hooks';
 import { Logo } from '@miurac/resources';
 import {
+  IconBuildingStore,
   IconChevronLeft,
   IconChevronRight,
   IconFolder,
   IconHome,
+  IconPresentation,
   IconSchool,
   IconSettings,
   IconTestPipe,
@@ -116,15 +118,25 @@ export function NavSections({
             setOpen={setOpen}
             name="Projects"
           />
-          {/* <LeftLink
-            path={'/department'}
-            icon={<IconFolder size={16} color="black" />}
+          <LeftLink
+            path={'/deck'}
+            icon={<IconPresentation size={16} color="black" />}
             color="#e0e0e0"
             tooglesize={tooglesize}
-            label={'Department'}
+            label={'Deck'}
             setOpen={setOpen}
-            name="Department"
+            name="Deck"
           />
+          <LeftLink
+            path={'/threebs'}
+            icon={<IconBuildingStore size={16} color="black" />}
+            color="#e0e0e0"
+            tooglesize={tooglesize}
+            label={'3Bs'}
+            setOpen={setOpen}
+            name="3bs"
+          />
+          {/* 
           <LeftLink
             path={'/staff'}
             icon={<IconUsers size={16} color="black" />}

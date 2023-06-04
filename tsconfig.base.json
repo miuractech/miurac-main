@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@miurac/miurac-files": ["libs/miurac-files/src/index.ts"],
-      "@miurac/resources": ["libs/resources/src/index.ts"]
+      "@miurac/resources": ["libs/resources/src/index.ts"],
+      "@miurac/threebs-enquiry": ["libs/threebs-enquiry/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

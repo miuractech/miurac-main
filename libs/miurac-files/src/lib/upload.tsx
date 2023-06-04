@@ -14,7 +14,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { miuracFileType, stateUrl } from './miurac-files';
-import { usePdf } from '@mikecousins/react-pdf';
+// import { usePdf } from '@mikecousins/react-pdf';
 import Preview from './preview';
 import {
   addDoc,

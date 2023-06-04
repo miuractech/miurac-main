@@ -1,10 +1,18 @@
 import {
+  ActionIcon,
   Badge,
   Button,
   Checkbox,
   Chip,
+  Col,
+  Container,
+  Grid,
+  List,
   LoadingOverlay,
+  Menu,
   Modal,
+  Paper,
+  Popover,
   Text,
   TextInput,
   Title,
@@ -33,6 +41,7 @@ import 'react-medium-image-zoom/dist/styles.css';
 import {
   IconBan,
   IconCheck,
+  IconDotsVertical,
   IconEdit,
   IconPlus,
   IconTrophy,
@@ -44,7 +53,7 @@ import { showNotification } from '@mantine/notifications';
 import { useForm, yupResolver } from '@mantine/form';
 import { staffCollection } from './constants';
 import AddEmployee from './addEmployee';
-import EditEmployee from './editEmployee';
+import OfferLetterModal from './offerLetterModal';
 //   import { Filter } from './Filter';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -57,6 +66,7 @@ export default function Employee({}: Props) {
   const [editData, setEditData] = useState<staffType | null>(null);
   const [loading, setloading] = useState(false);
   const mediaQuery = useMediaQuery('(min-width: 900px)');
+  const [offerModalOpen, setOfferModalOpen] = useState(false)
   // const [filterText, setFilterText] = useState<null|string>(null)
   const getInitialData = async () => {
     const q = query(
@@ -119,7 +129,8 @@ export default function Employee({}: Props) {
       selector: (row: any) => {
         return (
           <div className="flex gap-3">
-            <Button
+             <OfferLetterModal row={row} opened={offerModalOpen} setOpened={setOfferModalOpen}  />
+            {/* <Button
               className={`${mediaQuery ? 'w-34' : 'w-12'}`}
               size={mediaQuery ? 'sm' : 'xs'}
               variant="outline"
@@ -127,27 +138,43 @@ export default function Employee({}: Props) {
             >
               <IconEdit />
               {mediaQuery && <>Edit Access</>}
-            </Button>
-            <Button
-              color={row.disabled ? 'green' : 'red'}
-              className={`${mediaQuery ? 'w-28' : 'w-12'}`}
-              variant="outline"
-              size={mediaQuery ? 'sm' : 'xs'}
+            </Button> */}
+            <AddEmployee data={row} setData={setData} />
+            <Menu
+              position="bottom"
+              // opened={opened}
+              // onClose={() => setOpened(false)}
             >
-              <IconX />
-              {mediaQuery && <>Delete</>}
-            </Button>
+              <Menu.Target>
+                <ActionIcon size={mediaQuery ? 'sm' : 'xs'}>
+                  <IconDotsVertical />
+                </ActionIcon>
+              </Menu.Target>
+              <Menu.Dropdown>
+              <Menu.Item icon="$" onClick={() => setOfferModalOpen(true)}>
+                  Send offer letter
+                </Menu.Item>
+                <Menu.Item icon="🎓" onClick={() => void 0}>
+                  Send completion certificate
+                </Menu.Item>
+                <Menu.Item icon="✅" onClick={() => void 0}>
+                  Complete internship
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
           </div>
         );
       },
     },
   ];
 
+
+
   if (!data) return <LoaderComponent fullPage={true} />;
   return (
     <div className={`bg-white${mediaQuery ? ' p-10' : ' py-4'} rounded-lg`}>
       <div className="w-full flex pb-4 justify-between">
-        <AddEmployee />
+        <AddEmployee  />
 
         <Title align="center" order={3} className="text-gray-700">
           Staff
@@ -179,7 +206,10 @@ export default function Employee({}: Props) {
           <TextInput placeholder='Filter Name here' onChange={ (e) => setFilterText(e.target.value)}/>
           </div> */}
       <DataTable
-        customStyles={{ headRow: { style: { color: '#A1A1A1' } } }}
+        customStyles={{
+          headRow: { style: { color: '#A1A1A1' } },
+          table: { style: { height: 600 } },
+        }}
         columns={
           mediaQuery
             ? columns
@@ -196,7 +226,7 @@ export default function Employee({}: Props) {
         //   conditionalRowStyles={conditionalRowStyles}
         //   expandableRowsComponent={ExpandedComponent}
       />
-      {editData && <EditEmployee data={editData} setData={setData} />}
+    
       <Modal
         opened={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -269,6 +299,7 @@ export default function Employee({}: Props) {
           </Button>
         </form>
       </Modal>
+     
     </div>
   );
 }
@@ -278,6 +309,9 @@ export type staffType = {
   name: string;
   access: string[];
   id: string;
+  position:string;
+  doj:Date
+  ending:Date
 };
 
 export const EditAccess = ({

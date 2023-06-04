@@ -6,10 +6,13 @@
     "admin-e2e": "apps/admin-e2e",
     "employee-portal": "apps/employee-portal",
     "employee-portal-e2e": "apps/employee-portal-e2e",
+    "investor": "apps/investor",
+    "investor-e2e": "apps/investor-e2e",
     "miurac-files": "libs/miurac-files",
     "mockup-generator": "apps/mockup-generator",
     "mockup-generator-e2e": "apps/mockup-generator-e2e",
     "resources": "libs/resources",
+    "threebs-enquiry": "libs/threebs-enquiry",
     "website": "apps/website",
     "website-e2e": "apps/website-e2e"
   }

@@ -6,7 +6,7 @@ export default function CaseStudy() {
   return (
     <Container size={'xl'} className="manrope pt-16">
       <Title className="my-8" align="center" order={2}>
-        Case Study
+        Case Studies
       </Title>
       <div
         style={{
@@ -27,10 +27,10 @@ export default function CaseStudy() {
               to help those students through tech.
             </div>
             <br />
-            <Link to={'/case-study/edufeat'} >
-                <Button style={{ background: 'rgba(255, 255, 255, 0.2)' }}>
+            <Link to={'/case-study/edufeat'}>
+              <Button style={{ background: 'rgba(255, 255, 255, 0.2)' }}>
                 See case study
-                </Button>
+              </Button>
             </Link>
           </Grid.Col>
           <Grid.Col md={5} xs={12}>

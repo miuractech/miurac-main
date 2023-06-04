@@ -45,6 +45,9 @@ root.render(
           }
         }
       }}
+      withNormalizeCSS
+      withCSSVariables
+      withGlobalStyles
     > 
       <Provider store={store}>
         <NotificationsProvider>

@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+<g clip-path="url(#clip0_1156_779)">
+<path d="M0.5 13.29H8M7 13.29V10.79H1.5V13.29" stroke="#0094FF" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.78726 1.00242L4.20222 4.58745C3.8117 4.97797 3.8117 5.61114 4.20222 6.00166L5.78614 7.58558C6.17667 7.97611 6.80983 7.97611 7.20036 7.58558L10.7854 4.00055C11.1759 3.61003 11.1759 2.97686 10.7854 2.58634L9.20147 1.00242C8.81094 0.611893 8.17778 0.611894 7.78726 1.00242Z" stroke="#0094FF" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 5.78998L13.5 10.29" stroke="#0094FF" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_1156_779">
+<rect width="14" height="14" fill="white"/>
+</clipPath>
+</defs>
+</svg>

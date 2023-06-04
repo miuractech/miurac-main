@@ -78,6 +78,21 @@
           "destination": "/index.html"
         }
       ]
+    },
+    {
+      "public": "./dist/apps/investor/build",
+      "site": "investor-miurac",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     }
   ],
   "storage": {

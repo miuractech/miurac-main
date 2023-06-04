@@ -1,0 +1,34 @@
+.card {
+    border-radius: 5px;
+    padding: 12px;
+    height: 70px;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    /* transition: box-shadow 0.3s; */
+  }
+
+  .card-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .card-subtitle {
+    font-size: 14px;
+    height: 0px;
+    visibility: hidden;
+    transition: height 3s;
+  }
+
+  .card:hover .card-subtitle {
+    height: fit-content;
+    visibility: visible;
+    
+  }
+  .card:hover{
+    height: fit-content;
+  }

@@ -1,0 +1,162 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=ABeeZee:regular,italic);
+@import url(https://fonts.googleapis.com/css?family=Manrope:200,300,regular,500,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+@tailwind components;
+@tailwind utilities;
+
+/* @tailwind base; */
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Roie';
+  src: url('./assets/Roie.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.abeezee {
+  font-family: 'ABeeZee', serif;
+}
+
+.manrope {
+  font-family: 'Manrope', serif;
+}
+
+body {
+  margin: 0px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.roie {
+  font-family: 'Roie', serif;
+}
+
+.lato {
+  font-family: 'Lato';
+}
+
+@keyframes wave-text {
+  00% {
+    transform: translateY(0em);
+  }
+
+  2% {
+    transform: translateY(-0.1em);
+  }
+
+  5% {
+    transform: translateY(0em);
+  }
+
+  100% {
+    transform: translateY(0em);
+  }
+}
+
+.a-p:hover #ch1 #ch2 #ch3 #ch4 #ch5 #ch6 #ch7 #ch8 {
+  display: inline-block;
+  animation: wave-text 5s ease-in-out infinite;
+}
+
+.a-p #ch2 {
+  animation-delay: 0s;
+}
+
+.a-p #ch3 {
+  animation-delay: 0.05s;
+}
+
+.a-p #ch4 {
+  animation-delay: 0.1s;
+}
+
+.a-p #ch5 {
+  animation-delay: 0.15s;
+}
+
+.a-p #ch6 {
+  animation-delay: 0.2s;
+}
+
+.a-p #ch7 {
+  animation-delay: 0.25s;
+}
+
+.h-full-scr {
+  height: calc(100vh - 60px);
+  background-color: aqua;
+}
+
+.template-shadow {
+  box-shadow: 0px -15px 20px rgba(165, 171, 183, 0.15);
+}
+
+.container-master {
+  scroll-snap-type: y mandatory;
+}
+
+.child {
+  scroll-snap-align: start;
+}
+
+.text-shadow {
+  text-shadow: -5px 5px 10px rgba(209, 217, 230, 0.2),
+    5px -5px 10px rgba(209, 217, 230, 0.2),
+    -5px -5px 10px rgba(255, 255, 255, 0.35),
+    5px 5px 13px rgba(209, 217, 230, 0.9);
+}
+
+.scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 16px;
+}
+
+.scroll::-webkit-scrollbar-button {
+  width: 12px;
+  height: 12px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+.scroll::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+
+.scroll::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+
+.scroll::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+
+.scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* html, body {
+  position: fixed;
+  overflow: hidden;
+  overscroll-behavior-y: none;
+} */

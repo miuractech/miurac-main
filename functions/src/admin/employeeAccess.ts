@@ -27,7 +27,7 @@ export const addEmployeeAccess = functions
     // .runWith({
     //   timeoutSeconds: 300,
     // })
-    .firestore.document("employees/{email}")
+    .firestore.document("employees/{uid}")
     .onWrite(async (change) => {
       const newData = change.after.data() as staffType;
       return await grantRole(newData.email, newData.access);
