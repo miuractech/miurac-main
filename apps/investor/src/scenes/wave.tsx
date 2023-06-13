@@ -13,7 +13,7 @@ export function CoverSlide() {
   useFrame(() => {
     // Rotate the sphere on the z-axis every frame
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.003;
+      meshRef.current.rotation.x += 0.003;
     }
   });
 

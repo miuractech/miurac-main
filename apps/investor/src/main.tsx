@@ -37,7 +37,7 @@ root.render(
       },
       components: {
         Button: {
-          classNames: { root: 'font-light' },
+          classNames: { root: 'font-normal' },
         },
       },
     }}

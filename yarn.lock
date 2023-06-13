@@ -4233,6 +4233,15 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
+babel-plugin-file-loader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-file-loader/-/babel-plugin-file-loader-2.0.0.tgz#e9f7ecbd0f1131483f6f06a2a4cbc1574c00534f"
+  integrity sha512-MgonWXyl/VAMjMCU4YA3m0Zk95jdwLoQ/n8YM+M/CYKNtEfj9nk+bhgLbWKkUY2D9PzjQO8sx93QkOCMAAvn8Q==
+  dependencies:
+    big.js "^5.2.2"
+    fs-extra "^8.1.0"
+    mime "^2.4.4"
+
 babel-plugin-istanbul@^6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-istanbul/-/babel-plugin-istanbul-6.1.1.tgz#fa88ec59232fd9b4e36dbbc540a8ec9a9b47da73"
@@ -8498,6 +8507,11 @@ mime@1.6.0, mime@^1.4.1, mime@^1.6.0:
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
+mime@^2.4.4:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-2.6.0.tgz#a2a682a95cd4d0cb1d6257e28f83da7e35800367"
+  integrity sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==
+
 mimic-fn@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
@@ -9950,6 +9964,11 @@ react-transition-group@4.4.2:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
+
+react-type-animation@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-type-animation/-/react-type-animation-3.0.1.tgz#ba8d8d53dc51313c3ce9152865684f6297adcf71"
+  integrity sha512-n6erVzng071lN8A0UbNT9Q7m5D6puaa9OE1lakwu5UKxMkEnUbjs2MLT3jN/SUjuxNtKmDP2GqJKb3uQ5wZNkQ==
 
 react-use-measure@^2.1.1:
   version "2.1.1"

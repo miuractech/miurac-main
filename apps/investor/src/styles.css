@@ -31,7 +31,8 @@ a {
 body {
   margin: 0px;
   color: white;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Manrope', sans-serif;
+  background-color: rgb(31 41 55 / 1);
 }
 
 .roie {
