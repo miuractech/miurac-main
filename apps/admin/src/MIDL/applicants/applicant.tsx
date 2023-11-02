@@ -34,7 +34,7 @@ import { applicantType } from '@miurac/resources';
   type Props = {};
   
   // eslint-disable-next-line no-empty-pattern
-  export default function ApplicantComponent({}: Props) {
+  export default function TableComponent({}: Props) {
     const [visible, setVisible] = useState(false);
     const [data, setData] = useState<any[] | undefined>(undefined);
     const mediaQuery = useMediaQuery('(min-width: 900px)');

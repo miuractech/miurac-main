@@ -34,7 +34,7 @@
     "d3": "3",
     "dayjs": "^1.11.5",
     "embla-carousel-react": "^7.0.3",
-    "firebase": "^9.10.0",
+    "firebase": "9.22",
     "framer-motion": "^7.3.5",
     "gsap": "^3.11.1",
     "html2canvas": "^1.4.1",
